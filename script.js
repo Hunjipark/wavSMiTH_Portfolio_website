@@ -49,22 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', placeNodes);
 
   // =============================================
-  // 2. 마스터 볼륨 페이더
-  // =============================================
-  let masterVolume = 0.8;
-  const volSlider  = document.getElementById('master-volume');
-  const volDisplay = document.getElementById('volume-display');
-
-  volSlider.addEventListener('input', () => {
-    masterVolume = volSlider.value / 100;
-    volDisplay.textContent = volSlider.value;
-    // 현재 재생 중인 모든 Wavesurfer 인스턴스에 볼륨 즉시 반영
-    waveInstances.forEach(ws => {
-      try { ws.setVolume(masterVolume); } catch(e) {}
-    });
-  });
-
-  // =============================================
   // 3. 패널 열기/닫기 — GSAP 트랜지션
   // =============================================
   const app         = document.getElementById('app');
@@ -241,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
           backend:       'WebAudio',
         });
 
-        ws.setVolume(masterVolume);
+        ws.setVolume(0.8);
 
         if (src) {
           ws.load(src);

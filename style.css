@@ -507,18 +507,6 @@ body {
 #content-panel::-webkit-scrollbar-track { background: transparent; }
 #content-panel::-webkit-scrollbar-thumb { background: rgba(255,225,53,0.35); border-radius: 2px; }
 
-/* ---- 볼륨 페이더 (패널 맨 하단 고정) ---- */
-#volume-fader-wrap {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 40px;
-  background: rgba(0, 100, 80, 0.4);
-  border-top: 1px solid var(--panel-border);
-  width: 100%;
-  justify-content: flex-end;
-}
 
 /* ---- YouTube 부드러운 접이식(Fluid Accordion) 폴더 스타일 ---- */
 .yt-folder {
@@ -633,48 +621,6 @@ body {
   height: 100%;
 }
 
-.volume-icon {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-#master-volume {
-  -webkit-appearance: none;
-  appearance: none;
-  width: calc(var(--panel-width) / 3);
-  height: 3px;
-  background: rgba(255,255,255,0.20);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-#master-volume::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--orbit-glow);
-  cursor: pointer;
-  transition: transform 0.15s;
-}
-
-#master-volume::-webkit-slider-thumb:hover {
-  transform: scale(1.3);
-}
-
-.volume-val {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  width: 24px;
-  text-align: right;
-  flex-shrink: 0;
-}
 
 /* ============================================
    PANEL CONTENT FADE-IN
