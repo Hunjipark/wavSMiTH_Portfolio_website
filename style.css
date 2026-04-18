@@ -1,0 +1,757 @@
+/* ============================================
+   wavSMiTH Portfolio - 멀티 테마(Theme) 스킨 시스템
+   ============================================ */
+
+/* [공통 뼈대 변수] 스킨과 상관없이 고정되는 뼈대 수치 */
+:root {
+  --radius-panel: 28px;
+  --panel-width:  380px; 
+  --orbit-size:   420px;
+  --ease-swing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 0.5s var(--ease-swing);
+  --bg-cloud: none; /* 기본값: 배경 구름 레이어 끄기 */
+}
+
+/* 1안: 민트 & 옐로우 (현재 메인 스킨) */
+:root[data-theme="mint-yellow"] {
+  --bg:           #00C5A1;
+  --bg-dark:      #009A7E;
+  --accent:       #FFE135;
+  --accent-hover: #FFF176;
+  --text-primary: #FFFFFF;
+  --text-muted:   rgba(255,255,255,0.65);
+  --orbit-line:   rgba(255,255,255,0.30);
+  --orbit-inner-line: rgba(255,255,255,0.18);
+  --orbit-glow:   rgba(255,225,53,0.45);
+  --panel-bg:     rgba(0, 120, 96, 0.55);
+  --panel-border: rgba(255,255,255,0.22);
+  --node-bg:      rgba(255, 255, 255, 0.25);
+  --node-border:  rgba(255, 255, 255, 0.70);
+}
+
+/* 2안: 딥 다크 & 골드 (차분하고 성숙한 분위기 예시) */
+:root[data-theme="dark-gold"] {
+  --bg:           #121418;
+  --bg-dark:      #080a0c;
+  --accent:       #D4AF37;
+  --accent-hover: #F3E5AB;
+  --text-primary: #F0F0F0;
+  --text-muted:   rgba(255,255,255,0.45);
+  --orbit-line:   rgba(255,255,255,0.15);
+  --orbit-inner-line: #D4AF37; /* 노란색 실선 포인트 */
+  --orbit-glow:   rgba(212, 175, 55, 0.35);
+  --panel-bg:     rgba(18, 20, 24, 0.75);
+  --panel-border: rgba(255,255,255,0.12);
+  --node-bg:      rgba(255, 255, 255, 0.1);
+  --node-border:  rgba(255, 255, 255, 0.45);
+}
+
+/* 3안: 노마딕 트라이브 (파스텔 크림 & 뮤트 블루 - 밝은 테마) */
+:root[data-theme="nomadic-tribe"] {
+  --bg:           #F5F2EB;       /* 부드러운 크림색 배경 */
+  --bg-dark:      #E6DFD3;       
+  --accent:       #5E7B9E;       /* 뮤트 네이비/블루 */
+  --accent-hover: #7FA2BD;       
+  --text-primary: #2B303A;       /* 진한 네이비-그레이 (가독성) */
+  --text-muted:   #6C768A;       /* 뚜렷한 뮤트 톤으로 버튼 시인성 확보 */
+  --orbit-line:   rgba(55, 60, 77, 0.15); 
+  --orbit-inner-line: rgba(55, 60, 77, 0.25);
+  --orbit-glow:   rgba(127, 162, 189, 0.4);
+  --panel-bg:     rgba(186, 200, 211, 0.88); /* 너무 밝지 않은 데님 블루-그레이 (눈 보호) */
+  --panel-border: rgba(55, 60, 77, 0.18);
+  --node-bg:      rgba(255, 255, 255, 0.6);
+  --node-border:  #5E7B9E; /* 초록기 도는 원형 버튼 테두리 */
+}
+
+/* 4안: 퍼플 클라우드 (몽환적인 밤하늘 & 좌측 상단 은은한 보라빛 구름) */
+:root[data-theme="purple-cloud"] {
+  --bg:           #241544;       /* 기존(#170D2B)보다 한 톤 밝아지고 채도가 오른 우주색(딥-인디고) */
+  --bg-dark:      #130925;       
+  --accent:       #F3C15D;       /* 일러스트레이터 속 노란 버튼과 일치하는 옐로우 포인트 */
+  --accent-hover: #FFE2A6;       
+  --text-primary: #FFFFFF;
+  --text-muted:   rgba(255, 255, 255, 0.60);
+  --orbit-line:   rgba(255, 255, 255, 0.15);
+  --orbit-inner-line: rgba(243, 193, 93, 0.35); /* 궤도 안쪽은 달빛 같은 노란 조명 */
+  --orbit-glow:   rgba(142, 68, 173, 0.55);      /* 발광 효과는 신비로운 자수정(Amethyst) 색상 */
+  --panel-bg:     rgba(23, 13, 43, 0.70);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --node-bg:      rgba(255, 255, 255, 0.15);
+  --node-border:  #A260C6;       /* 부드러운 바이올렛 테두리 */
+  
+  /* [커스텀 아트웍] 요청하신 좌측 상단부터 대각선으로 은은하게 번지는 신비로운 보라/마젠타 빛 무리 */
+  --bg-cloud: radial-gradient(ellipse 90vw 110vh at 0% -5%, rgba(133, 44, 185, 0.38) 0%, rgba(77, 24, 148, 0.18) 42%, transparent 80%);
+}
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  background: var(--bg-cloud), linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- 배경 노이즈 텍스처 (프리미엄 질감) ---- */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ---- App Wrapper ---- */
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ============================================
+   ORBIT SECTION
+   ============================================ */
+#orbit-section {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: left var(--transition), transform var(--transition);
+  z-index: 10;
+}
+
+/* 패널 열릴 때 오빗을 좌측으로 당기는 상태 */
+#app.panel-open #orbit-section {
+  left: 28%;
+}
+
+/* ---- Orbit Container ---- */
+#orbit-container {
+  position: relative;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- SVG Ring ---- */
+#orbit-ring {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 18px var(--orbit-glow));
+}
+
+.orbit-path {
+  fill: none;
+  stroke: var(--orbit-line);
+  stroke-width: 1.2px;
+  stroke-dasharray: 6 10;
+  animation: orbit-spin 60s linear infinite;
+  transform-origin: 250px 250px;
+}
+
+.orbit-inner {
+  fill: none;
+  stroke: var(--orbit-inner-line);
+  stroke-width: 1px;
+  r: 185;
+}
+
+@keyframes orbit-spin {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -1000; }
+}
+
+/* ---- Center Typography ---- */
+#orbit-center-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  /* 폰트 커닝 및 시각적 무게중심을 완벽히 맞추기 위해 X를 우측으로(-48.5%), Y를 상단으로(-54%) 보정합니다 */
+  transform: translate(-48.5%, -54%);
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.title-main {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  text-shadow: 0 0 24px var(--orbit-glow);
+  line-height: 1;
+}
+
+.title-sub {
+  margin-top: 0.55rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+  font-size: clamp(0.65rem, 1.5vw, 0.82rem);
+  letter-spacing: 0.20em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  line-height: 1.7;
+}
+
+/* ---- Orbit Node Buttons ---- */
+#orbit-nodes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.orbit-node {
+  position: absolute;
+  width: 14px;         /* 완전한 원형 축소 */
+  height: 14px;
+  border-radius: 50%;
+  background: var(--node-bg);
+  border: 1.5px solid var(--node-border);
+  cursor: pointer;
+  pointer-events: all;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transform: translate(-50%, -50%);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.orbit-node:hover {
+  background: rgba(255, 225, 53, 0.35);
+  border-color: rgba(255, 225, 53, 0.85);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+.orbit-node.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+/* ---- 궤도 바깥 카테고리 텍스트 레이블 ---- */
+#orbit-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.orbit-label {
+  position: absolute;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.4;
+  pointer-events: none;
+  text-shadow: 0 0 12px var(--orbit-glow);
+  transition: color 0.25s;
+}
+
+.orbit-sub-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  margin-top: -2px;
+}
+
+.orbit-label.active {
+  color: var(--accent);
+}
+
+/* ============================================
+   CONTENT PANEL (우측 슬라이드)
+   ============================================ */
+#content-panel {
+  position: fixed;
+  top: 0; right: 0;
+  width: var(--panel-width);
+  height: 100vh;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--panel-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition);
+  z-index: 100;
+  border-radius: var(--radius-panel) 0 0 var(--radius-panel);
+  overflow: hidden;
+}
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable; /* 스크롤바가 생기거나 말거나 레이아웃 뼈대 고정 */
+  padding: 30px 40px 20px;
+}
+
+/* 커스텀 투명-블랙 스크롤바 */
+.panel-content::-webkit-scrollbar {
+  width: 8px;
+}
+.panel-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.panel-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#app.panel-open #content-panel {
+  transform: translateX(0);
+}
+
+/* 닫기 버튼 */
+#panel-close {
+  position: absolute;
+  top: 22px; right: 26px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--panel-border);
+  border-radius: 50%;
+  z-index: 999;
+  width: 38px; height: 38px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#panel-close:hover {
+  background: rgba(255,225,53,0.25);
+  transform: rotate(90deg);
+}
+
+/* 패널 내 타이틀 */
+.panel-title {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 6px;
+  text-shadow: 0 0 16px var(--orbit-glow);
+}
+
+.panel-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* ---- Track List ---- */
+.track-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.track-item {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.2s;
+}
+
+.track-item:hover {
+  background: rgba(255,225,53,0.10);
+}
+
+.track-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.track-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.track-genre {
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.waveform-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.waveform {
+  flex: 1;
+  height: 40px;
+}
+
+.play-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 34px; height: 34px;
+  font-size: 0.85rem;
+  color: #004d3a;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.play-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 16px var(--orbit-glow);
+}
+
+/* ---- Career List ---- */
+.career-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.career-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.career-year {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  white-space: nowrap;
+  padding-top: 3px;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  width: 135px; /* 날짜 길이에 상관없이 회사명이 일직선으로 시작되도록 고정 */
+}
+
+.career-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.career-detail strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.career-kr-name {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  display: block; /* 줄바꿈 후 살짝 띄우기 위함 */
+  margin-top: 1px;
+}
+
+.career-detail span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ---- Scrollbar ---- */
+#content-panel::-webkit-scrollbar { width: 4px; }
+#content-panel::-webkit-scrollbar-track { background: transparent; }
+#content-panel::-webkit-scrollbar-thumb { background: rgba(255,225,53,0.35); border-radius: 2px; }
+
+/* ---- 볼륨 페이더 (패널 맨 하단 고정) ---- */
+#volume-fader-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 40px;
+  background: rgba(0, 100, 80, 0.4);
+  border-top: 1px solid var(--panel-border);
+  width: 100%;
+  justify-content: flex-end;
+}
+
+/* ---- YouTube 부드러운 접이식(Fluid Accordion) 폴더 스타일 ---- */
+.yt-folder {
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.yt-folder-title {
+  font-family: 'Outfit', 'Pretendard', sans-serif;
+  margin-bottom: 16px;
+  padding-left: 5px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  line-height: 1.3;
+}
+
+/* 2줄로 쪼개진 BGM 카테고리 (회사명 / 게임명) */
+.yt-folder-company {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.yt-folder-game {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.yt-folder-title:hover .yt-folder-company {
+  color: #fff;
+}
+
+.yt-folder-title:hover .yt-folder-game {
+  color: var(--accent-hover);
+}
+
+/* 모던한 + / × 아이콘 애니메이션 */
+.yt-folder-title::after {
+  content: '+';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
+}
+
+.yt-folder.open .yt-folder-title::after {
+  transform: translateY(-50%) rotate(45deg); /* +가 45도 회전해 ×가 됨 */
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* CSS Grid 0fr -> 1fr 트릭으로 완벽하게 부드러운 열고 닫힘 */
+.folder-content-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.yt-folder.open .folder-content-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.folder-content {
+  overflow: hidden; /* 영역 밖 콘텐츠 가리기 필수 */
+}
+
+.yt-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 16px 14px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.yt-song-title {
+  font-family: 'Outfit', 'Pretendard', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  padding-left: 4px;
+  letter-spacing: 0.02em;
+}
+
+.yt-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.yt-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.volume-icon {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+#master-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: calc(var(--panel-width) / 3);
+  height: 3px;
+  background: rgba(255,255,255,0.20);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#master-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--orbit-glow);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+#master-volume::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+.volume-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   PANEL CONTENT FADE-IN
+   ============================================ */
+.panel-content {
+  animation: panelFadeIn 0.5s ease forwards;
+}
+
+/* ===== 외부 떠있는 위젯: 언어 전환 ===== */
+#language-switcher {
+  position: absolute;
+  bottom: 26px;
+  right: 26px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  padding: 6px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  transform: translateX(0);
+  transition: transform var(--transition);
+}
+
+#app.panel-open #language-switcher {
+  transform: translateX(calc(var(--panel-width) * -1));
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Outfit', 'Pretendard', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.lang-btn.active, .lang-btn:hover {
+  color: var(--accent);
+}
+
+.lang-sep {
+  color: var(--panel-border);
+  font-size: 0.8rem;
+  padding-bottom: 2px;
+}
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --orbit-size: 310px;
+    --panel-width: 100vw;
+  }
+  #content-panel {
+    border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+    top: auto; bottom: 0; right: 0;
+    width: 100%; height: 72vh;
+    transform: translateY(100%);
+  }
+  #app.panel-open #content-panel {
+    transform: translateY(0);
+  }
+  #app.panel-open #orbit-section {
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%) scale(0.72);
+  }
+}

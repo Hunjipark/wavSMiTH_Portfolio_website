@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- [사용 가능한 스킨 테마 목록] data-theme="여기" 에 아래 이름을 복붙하세요!
+    1. mint-yellow  : 사이버틱한 민트 배경과 네온 옐로우 (1안 기본)
+    2. dark-gold    : 딥 다크 블랙 배경과 고급스런 샴페인 골드 조명 (2안)
+    3. nomadic-tribe: 포근한 크림색 배경과 차분한 파스텔 데님-그레이 (3안)
+    4. purple-cloud : 깊은 밤 배경 우측상단에 부드럽게 퍼져있는 보라색 구름 (4안)
+-->
+<html lang="ko" data-theme="purple-cloud">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>wavSMiTH | Game Music Composer & Sound Designer</title>
+  <meta name="description"
+    content="wavSMiTH - Game Music Composer & Sound Designer portfolio. Explore SFX, BGM, and career works." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===================== MAIN SCENE ===================== -->
+  <div id="app">
+
+    <!-- 배경 노이즈 텍스처 레이어 -->
+    <div class="bg-noise"></div>
+
+    <!-- ===== ORBIT SECTION (left-side on panel open) ===== -->
+    <!-- ===== 외부 떠있는 위젯: 언어 전환 (Right Bottom) ===== -->
+    <div id="language-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="kr">KR</button>
+    </div>
+
+    <section id="orbit-section">
+
+      <!-- 오빗 링 + 타이포그래피 컨테이너 -->
+      <div id="orbit-container">
+
+        <!-- SVG 궤도 링 -->
+        <svg id="orbit-ring" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- 메인 궤도 선 -->
+          <circle class="orbit-path" cx="250" cy="250" r="200" />
+          <!-- 데코 내부 원 (점선보다 작게, 살짝 크게) -->
+          <circle class="orbit-inner" cx="250" cy="250" r="185" />
+          <!-- 카테고리 노드 위치 가이드 (JS에서 동적 생성) -->
+        </svg>
+
+        <!-- 카테고리 버튼 (orbit 위의 작은 원형 마커) -->
+        <div id="orbit-nodes">
+          <button class="orbit-node" data-category="sfx" data-angle="-45"></button>
+          <button class="orbit-node" data-category="bgm" data-angle="27"></button>
+          <button class="orbit-node" data-category="career" data-angle="99"></button>
+          <button class="orbit-node" data-category="artive" data-angle="171"></button>
+          <button class="orbit-node" data-category="youtube" data-angle="243"></button>
+        </div>
+
+        <!-- 카테고리 텍스트 레이블 (orbit 바깥쪽) -->
+        <div id="orbit-labels">
+          <div class="orbit-label" data-category="sfx" data-angle="-45" data-i18n="orbit_sfx">SFX</div>
+          <div class="orbit-label" data-category="bgm" data-angle="27" data-i18n="orbit_bgm">BGM</div>
+          <div class="orbit-label" data-category="career" data-angle="99" data-i18n="orbit_career">CAREER</div>
+          <div class="orbit-label" data-category="artive" data-angle="171" data-i18n-html="orbit_artive">ARTIVE
+            SOUND<br><span class="orbit-sub-label">(Contact)</span></div>
+          <div class="orbit-label" data-category="youtube" data-angle="243" data-i18n="orbit_youtube">YOUTUBE</div>
+        </div>
+
+        <!-- 중앙 타이포 -->
+        <div id="orbit-center-text">
+          <h1 class="title-main" data-i18n="title_main">wavSMiTH</h1>
+          <p class="title-sub" data-i18n-html="title_sub">Game Music Composer<br />&amp; Sound Designer</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== CONTENT PANEL (우측 슬라이드 인) ===== -->
+    <aside id="content-panel" aria-hidden="true">
+      <button id="panel-close" aria-label="Close panel">&#x2715;</button>
+
+      <!-- SFX 패널 -->
+      <div class="panel-content" id="panel-sfx" hidden>
+        <h2 class="panel-title" data-i18n="panel_sfx_title">SFX</h2>
+        <p class="panel-desc" data-i18n="panel_sfx_desc">Sound Effects — Game UI, Environments, Character Foley</p>
+        <div id="tracklist-sfx">
+
+          <!-- SFX 폴더 -->
+          <div class="yt-folder open">
+            <div class="yt-folder-title" data-i18n="sfx_folder_1">Game Sound Redesign</div>
+            <div class="folder-content-wrapper">
+              <div class="folder-content">
+
+                <!-- 1. 호라이즌: 포비든 웨스트 -->
+                <div class="yt-item">
+                  <h4 class="yt-song-title" data-i18n="sfx_item_1">Horizon Forbidden West</h4>
+                  <div class="yt-wrapper">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZjrZGg8YRBo" frameborder="0"
+                      allowfullscreen></iframe>
+                  </div>
+                </div>
+
+                <!-- 2. 그랑블루 판타지 -->
+                <div class="yt-item">
+                  <h4 class="yt-song-title" data-i18n="sfx_item_2">Granblue Fantasy: Relink</h4>
+                  <div class="yt-wrapper">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/OUzhYBhbzoQ" frameborder="0"
+                      allowfullscreen></iframe>
+                  </div>
+                </div>
+
+                <!-- 3. 드래곤즈 도그마 -->
+                <div class="yt-item">
+                  <h4 class="yt-song-title" data-i18n="sfx_item_3">Dragon's Dogma 2</h4>
+                  <div class="yt-wrapper">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/MA9aeXCVA9o" frameborder="0"
+                      allowfullscreen></iframe>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BGM 패널 (YouTube 임베드 폴더형) -->
+      <div class="panel-content" id="panel-bgm" hidden>
+        <h2 class="panel-title" data-i18n="panel_bgm_title">BGM</h2>
+        <p class="panel-desc" data-i18n="panel_bgm_desc">Background Music — In Game</p>
+
+        <!-- 폴더 그룹: 니케 -->
+        <div class="yt-folder open">
+          <div class="yt-folder-title" data-i18n-html="bgm_folder_nikke">Goddess of Victory: Nikke (Shift Up)</div>
+          <div class="folder-content-wrapper">
+            <div class="folder-content">
+              <div class="yt-item">
+                <h4 class="yt-song-title" data-i18n="bgm_nikke_1">ABSOLUTE : Tactical</h4>
+                <div class="yt-wrapper">
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WurNwvgtbpU" frameborder="0"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+
+              <div class="yt-item">
+                <h4 class="yt-song-title" data-i18n="bgm_nikke_2">COINS IN RUSH : Smooth Operation</h4>
+                <div class="yt-wrapper">
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FvnF8hZ60O4" frameborder="0"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 폴더 그룹: 던파 모바일 -->
+        <div class="yt-folder open">
+          <div class="yt-folder-title" data-i18n-html="bgm_folder_dnf">Dungeon & Fighter Mobile (Neople)</div>
+          <div class="folder-content-wrapper">
+            <div class="folder-content">
+              <div class="yt-item">
+                <h4 class="yt-song-title" data-i18n="bgm_dnf_1">Sirocco of the Erosion (Ash Gray Yearning)</h4>
+                <div class="yt-wrapper">
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/DvpoOzkxdAA" frameborder="0"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+
+              <div class="yt-item">
+                <h4 class="yt-song-title" data-i18n="bgm_dnf_2">Sirocco of the Erosion (Gloomy Memory)</h4>
+                <div class="yt-wrapper">
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-fYPCd5l6mA" frameborder="0"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Career 패널 -->
+      <div class="panel-content" id="panel-career" hidden>
+        <h2 class="panel-title" data-i18n="panel_career_title">Career</h2>
+        <p class="panel-desc" data-i18n="panel_career_desc">Work history, projects, and collaborations.</p>
+        <ul class="career-list">
+
+          <li class="career-item">
+            <span class="career-year" data-i18n="career_1_date">2025.07 – Present</span>
+            <div class="career-detail">
+              <strong data-i18n-html="career_1_title">ARTIVE SOUND</strong>
+              <span data-i18n="career_1_desc">B2B Partner Project Audio Lead (Shift Up, Neople, Krafton, Kabam,
+                etc.)</span>
+            </div>
+          </li>
+
+          <li class="career-item">
+            <span class="career-year" data-i18n="career_2_date">2023.01 – 2025.06</span>
+            <div class="career-detail">
+              <strong data-i18n-html="career_2_title">Freelance Game Sound Designer</strong>
+              <span data-i18n="career_2_desc">Composed/Designed BGM & SFX for numerous indie/mobile games / Produced
+                audio for MMA 2023 IVE.</span>
+            </div>
+          </li>
+
+          <li class="career-item">
+            <span class="career-year" data-i18n="career_3_date">2021.01 – 2022.07</span>
+            <div class="career-detail">
+              <strong data-i18n-html="career_3_title">The Rewind Film</strong>
+              <span data-i18n="career_3_desc">Video Sound Engineer (Led sound for global brands: Samsung Galaxy S21,
+                E-mart, IKEA)</span>
+            </div>
+          </li>
+
+          <li class="career-item">
+            <span class="career-year" data-i18n="career_4_date">2018.09 – 2020.12</span>
+            <div class="career-detail">
+              <strong data-i18n-html="career_4_title">Early Career & Education</strong>
+              <span data-i18n="career_4_desc">Major in Practical Music Composition, Dong-Ah Institute of Media and Arts
+                / Winner of Naver Grafolio Creator Pitching</span>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- 볼륨 페이더 (패널 맨 하단) -->
+      <div id="volume-fader-wrap">
+        <span class="volume-icon">&#9834;</span>
+        <input type="range" id="master-volume" min="0" max="100" value="80" />
+        <span class="volume-val" id="volume-display">80</span>
+      </div>
+
+    </aside>
+
+  </div><!-- /#app -->
+
+  <!-- ===== 로컬 라이브러리 연결 ===== -->
+  <script src="External Library/gsap.min.js"></script>
+  <script src="External Library/wavesurfer.min.js"></script>
+  <script src="lang.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

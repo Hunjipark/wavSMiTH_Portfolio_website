@@ -1,0 +1,280 @@
+/* ============================================
+   wavSMiTH Portfolio — script.js
+   - 오빗 노드 + 외부 레이블 각도 배치
+   - GSAP 트랜지션 (오빗 좌측 스윙 + 패널 슬라이드)
+   - Wavesurfer.js 파형 / 슬라이드바 플레이어
+   - 전체 볼륨 마스터 페이더
+   ============================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // =============================================
+  // 1. 오빗 노드 + 외부 레이블 각도 배치
+  // =============================================
+  const LABEL_OFFSET = 58; // 버튼 반지름(26) + 여백(32)
+
+  function placeNodes() {
+    const container = document.getElementById('orbit-container');
+    const containerHalf = container.offsetWidth / 2;
+    const ratio = container.offsetWidth / 500;
+    const r      = 200 * ratio;          // 궤도 반지름
+
+    // 버튼 배치 (CSS transform: translate(-50%,-50%) 가 중앙 정렬)
+    document.querySelectorAll('.orbit-node').forEach(node => {
+      const angleRad = (parseFloat(node.dataset.angle) - 90) * (Math.PI / 180);
+      node.style.left = (containerHalf + r * Math.cos(angleRad)) + 'px';
+      node.style.top  = (containerHalf + r * Math.sin(angleRad)) + 'px';
+    });
+
+    // 레이블 배치 (CSS transform: translate(-50%,-50%) 가 중앙 정렬)
+    document.querySelectorAll('.orbit-label').forEach(label => {
+      const angleRad = (parseFloat(label.dataset.angle) - 90) * (Math.PI / 180);
+      
+      // 텍스트 박스 크기를 고려하여 '글자 테두리와 버튼 테두리 간의 거리'를 일정하게 유지
+      const wHalf = label.offsetWidth / 2;
+      const hHalf = label.offsetHeight / 2;
+      
+      const extraX = wHalf * Math.abs(Math.cos(angleRad));
+      const extraY = hHalf * Math.abs(Math.sin(angleRad));
+      
+      // r(가운데노드) + 26px(고정간격) + extra(글자크기 보정)
+      const adjustedRLabel = r + (26 * ratio) + extraX + extraY;
+      
+      label.style.left = (containerHalf + adjustedRLabel * Math.cos(angleRad)) + 'px';
+      label.style.top  = (containerHalf + adjustedRLabel * Math.sin(angleRad)) + 'px';
+    });
+  }
+
+  placeNodes();
+  window.addEventListener('resize', placeNodes);
+
+  // =============================================
+  // 2. 마스터 볼륨 페이더
+  // =============================================
+  let masterVolume = 0.8;
+  const volSlider  = document.getElementById('master-volume');
+  const volDisplay = document.getElementById('volume-display');
+
+  volSlider.addEventListener('input', () => {
+    masterVolume = volSlider.value / 100;
+    volDisplay.textContent = volSlider.value;
+    // 현재 재생 중인 모든 Wavesurfer 인스턴스에 볼륨 즉시 반영
+    waveInstances.forEach(ws => {
+      try { ws.setVolume(masterVolume); } catch(e) {}
+    });
+  });
+
+  // =============================================
+  // 3. 패널 열기/닫기 — GSAP 트랜지션
+  // =============================================
+  const app         = document.getElementById('app');
+  const panel       = document.getElementById('content-panel');
+  const panelClose  = document.getElementById('panel-close');
+  const allContents = document.querySelectorAll('.panel-content');
+  let currentCategory = null;
+
+  function openPanel(category) {
+    if (currentCategory === category) { closePanel(); return; }
+    currentCategory = category;
+
+    // 모든 패널 내용 히든
+    allContents.forEach(el => { el.hidden = true; });
+
+    // 해당 카테고리 패널 표시
+    const target = document.getElementById('panel-' + category);
+    if (target) target.hidden = false;
+
+    // 노드 & 레이블 active 상태
+    document.querySelectorAll('.orbit-node').forEach(n =>
+      n.classList.toggle('active', n.dataset.category === category)
+    );
+    document.querySelectorAll('.orbit-label').forEach(l =>
+      l.classList.toggle('active', l.dataset.category === category)
+    );
+
+    // CSS 클래스 추가 → CSS transition 발동
+    app.classList.add('panel-open');
+    panel.setAttribute('aria-hidden', 'false');
+
+    // GSAP 오빗 미세 탄성 이펙트
+    gsap.fromTo('#orbit-container',
+      { scale: 1 },
+      { scale: 0.92, duration: 0.3, ease: 'power2.out',
+        onComplete: () => gsap.to('#orbit-container', { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' })
+      }
+    );
+
+    // Wavesurfer 초기화 (패널 열린 뒤 약간 딜레이)
+    setTimeout(() => initWaveforms(category), 450);
+  }
+
+  function closePanel() {
+    currentCategory = null;
+    app.classList.remove('panel-open');
+    panel.setAttribute('aria-hidden', 'true');
+    document.querySelectorAll('.orbit-node').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.orbit-label').forEach(l => l.classList.remove('active'));
+
+    // Wavesurfer 인스턴스 정리
+    waveInstances.forEach(ws => { try { ws.destroy(); } catch(e) {} });
+    waveInstances = [];
+    initializedWaves.clear();
+  }
+
+  document.querySelectorAll('.orbit-node').forEach(node => {
+    node.addEventListener('click', (e) => {
+      e.stopPropagation(); // 노드 클릭 시 이벤트 전파 방지
+      
+      const cat = node.dataset.category;
+      if (cat === 'youtube') {
+        window.open('https://www.youtube.com/@wavsmith/featured', '_blank');
+      } else if (cat === 'artive') {
+        window.open('https://www.artivesound.com/', '_blank');
+      } else {
+        openPanel(cat);
+      }
+    });
+  });
+
+  // ======== 다국어(i18n) 통합 엔진 ========
+  function setLanguage(lang) {
+    // lang.js에서 데이터를 불러옴
+    if (!window.i18nData || !window.i18nData[lang]) return;
+    const data = window.i18nData[lang];
+    
+    // 일반 텍스트 데이터 교체
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (data[key]) el.textContent = data[key];
+    });
+
+    // 줄바꿈(<br>) 등 HTML 태그 포함 텍스트 교체
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (data[key]) el.innerHTML = data[key];
+    });
+
+    // 브라우저에 현재 표출 중인 언어 인식 교체
+    document.documentElement.lang = lang;
+  }
+
+  // 언어 변경 버튼 기능 및 트리거
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // 누른 버튼의 언어(en, kr)로 일괄 변경!
+      const newLang = btn.dataset.lang || 'en';
+      setLanguage(newLang);
+    });
+  });
+
+  // 웹사이트 첫 로딩 시 기본적으로 켜질 언어 설정
+  const initialLang = document.querySelector('.lang-btn.active')?.dataset.lang || 'en';
+  setLanguage(initialLang);
+  
+  // ======== 0. 폴더 아코디언 접기/펴기 이벤트 연결 ========
+  document.querySelectorAll('.yt-folder-title').forEach(title => {
+    title.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const folder = title.closest('.yt-folder');
+      if (folder) folder.classList.toggle('open');
+    });
+  });
+  
+  // 1. X 버튼 누르면 닫기
+  panelClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closePanel();
+  });
+  
+  // 2. ESC 키 누르면 닫기
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && app.classList.contains('panel-open')) closePanel();
+  });
+
+  // 3. 슬라이드 밖 화면 클릭 시 패널 닫기
+  document.addEventListener('click', (e) => {
+    if (app.classList.contains('panel-open')) {
+      // 패널 영역이 클릭된 위치를 포함하지 않으면 외부 클릭으로 간주
+      const isInsidePanel = panel.contains(e.target);
+      if (!isInsidePanel) {
+        closePanel();
+      }
+    }
+  });
+
+  // =============================================
+  // 4. Wavesurfer.js 슬라이드바 파형 플레이어
+  // =============================================
+  let waveInstances  = [];
+  const initializedWaves = new Set();
+
+  function initWaveforms(category) {
+    const panelEl = document.getElementById('panel-' + category);
+    if (!panelEl) return;
+
+    const waveEls = panelEl.querySelectorAll('.waveform');
+
+    waveEls.forEach((el) => {
+      if (initializedWaves.has(el.id)) return;
+      initializedWaves.add(el.id);
+
+      const playBtn = el.closest('.waveform-wrap')?.querySelector('.play-btn');
+      const src = playBtn?.dataset.src || '';
+
+      try {
+        const ws = WaveSurfer.create({
+          container: el,
+          waveColor:     'rgba(255,255,255,0.28)',
+          progressColor: '#FFE135',
+          cursorColor:   'rgba(255,225,53,0.7)',
+          cursorWidth:   2,
+          barWidth:      2,
+          barRadius:     2,
+          barGap:        2,
+          height:        44,
+          normalize:     true,
+          interact:      true,   // 클릭해서 seek 가능
+          backend:       'WebAudio',
+        });
+
+        ws.setVolume(masterVolume);
+
+        if (src) {
+          ws.load(src);
+        }
+
+        // 재생 상태에 따라 버튼 아이콘 토글
+        if (playBtn) {
+          ws.on('play',  () => { playBtn.innerHTML = '&#9646;&#9646;'; });
+          ws.on('pause', () => { playBtn.innerHTML = '&#9654;'; });
+          ws.on('finish',() => { playBtn.innerHTML = '&#9654;'; });
+
+          playBtn.addEventListener('click', () => {
+            // 다른 트랙 일시정지
+            waveInstances.forEach(w => { if (w !== ws) { try { w.pause(); } catch(e) {} } });
+            ws.playPause();
+          });
+        }
+
+        waveInstances.push(ws);
+
+      } catch(e) {
+        console.warn('Wavesurfer init error:', e);
+      }
+    });
+  }
+
+  // =============================================
+  // 5. 구도 GSAP 초기 등장 애니메이션
+  // =============================================
+  gsap.from('#orbit-container', {
+    scale: 0.85, opacity: 0, duration: 1.2, ease: 'elastic.out(1, 0.6)',
+  });
+  // 노드/레이블에 GSAP 적용 안 함 — transform 충돌 법판
+
+
+});
