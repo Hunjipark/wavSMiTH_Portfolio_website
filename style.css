@@ -683,9 +683,17 @@ body {
    ============================================ */
 @media (max-width: 768px) {
   :root {
-    --orbit-size: 310px;
+    --orbit-size: 240px; /* 오빗 중심축을 확 줄여 글씨 잘림 방지 */
     --panel-width: 100vw;
   }
+  
+  /* 모바일용 오빗 레이블 글씨 밸런스 축소 */
+  .title-main { font-size: 1.6rem; }
+  .title-sub { font-size: 0.65rem; margin-top: 0.35rem; }
+  .orbit-label { font-size: 0.75rem; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(0,0,0,0.6); }
+  .orbit-sub-label { font-size: 0.55rem; }
+  .orbit-node { width: 12px; height: 12px; } /* 버튼 크기도 아주 살짝 축소 */
+
   #content-panel {
     border-radius: var(--radius-panel) var(--radius-panel) 0 0;
     top: auto; bottom: 0; right: 0;
@@ -697,7 +705,18 @@ body {
   }
   #app.panel-open #orbit-section {
     left: 50%;
-    top: 20%;
-    transform: translate(-50%, -50%) scale(0.72);
+    top: 17%; /* 패널이 올라올 때 오빗이 화면 약간 더 위쪽으로 올라감 */
+    transform: translate(-50%, -50%) scale(0.68);
+  }
+
+  /* 언어 전환 버튼 모바일 이동 (가려지지 않게 최상단 좌측) */
+  #language-switcher {
+    bottom: auto; right: auto;
+    top: 20px; left: 20px;
+    background: rgba(20, 20, 25, 0.65); /* 모바일 가독성을 위해 살짝 짙은 배경 */
+    transform: none; /* 패널 열려도 숨지 않음 */
+  }
+  #app.panel-open #language-switcher {
+    transform: none; 
   }
 }
