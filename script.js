@@ -9,6 +9,34 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =============================================
+  // 0. Ambience Design 무작위 유튜브 로딩 (videos.js 데이터 참조)
+  // =============================================
+  const ambienceContent = document.getElementById('ambience-content');
+  if (ambienceContent && typeof ambienceVideos !== 'undefined') {
+    const shuffled = [...ambienceVideos];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    
+    // 전체 리스트에서 무작위 5개만 추출 (videos.js에서 데이터 공급)
+    const selectedVideos = shuffled.slice(0, 5);
+    
+    let html = '';
+    selectedVideos.forEach(video => {
+      html += `
+        <div class="yt-item">
+          <h4 class="yt-song-title">${video.title}</h4>
+          <div class="yt-wrapper">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      `;
+    });
+    ambienceContent.innerHTML = html;
+  }
+
+  // =============================================
   // 1. 오빗 노드 + 외부 레이블 각도 배치
   // =============================================
   const LABEL_OFFSET = 58; // 버튼 반지름(26) + 여백(32)

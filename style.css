@@ -51,17 +51,17 @@
 :root[data-theme="nomadic-tribe"] {
   --bg:           #F5F2EB;       /* 부드러운 크림색 배경 */
   --bg-dark:      #E6DFD3;       
-  --accent:       #5E7B9E;       /* 뮤트 네이비/블루 */
-  --accent-hover: #7FA2BD;       
-  --text-primary: #2B303A;       /* 진한 네이비-그레이 (가독성) */
-  --text-muted:   #6C768A;       /* 뚜렷한 뮤트 톤으로 버튼 시인성 확보 */
+  --accent:       #4A6B8E;       /* 뮤트 네이비/블루 (진하게 가독성 강화) */
+  --accent-hover: #5C88AE;       
+  --text-primary: #1A1E26;       /* 진한 네이비-그레이 (진하게 가독성 확보) */
+  --text-muted:   #535A6B;       /* 뚜렷한 뮤트 톤으로 버튼 시인성 확보 (더 진하게) */
   --orbit-line:   rgba(55, 60, 77, 0.15); 
   --orbit-inner-line: rgba(55, 60, 77, 0.25);
   --orbit-glow:   rgba(127, 162, 189, 0.4);
-  --panel-bg:     rgba(186, 200, 211, 0.88); /* 너무 밝지 않은 데님 블루-그레이 (눈 보호) */
+  --panel-bg:     rgba(215, 224, 235, 0.92); /* 너무 밝지 않은 데님 블루-그레이 톤 유지하되 살짝 더 밝게 투명도(0.92) 확보 */
   --panel-border: rgba(55, 60, 77, 0.18);
   --node-bg:      rgba(255, 255, 255, 0.6);
-  --node-border:  #5E7B9E; /* 초록기 도는 원형 버튼 테두리 */
+  --node-border:  #4A6B8E; /* 초록기 도는 원형 버튼 테두리 */
 }
 
 /* 4안: 퍼플 클라우드 (몽환적인 밤하늘 & 좌측 상단 은은한 보라빛 구름) */
@@ -794,13 +794,13 @@ body {
     transform: translate(-50%, -50%) scale(0.68);
   }
 
-  /* 언어 전환 버튼 모바일 이동 (화면 렌즈 기준 고정) */
+  /* 언어전환 버튼 모바일 (화면 빈 공간 중앙 이동) */
   #language-switcher {
-    position: fixed; /* 스크롤해도 항상 좌측 상단에 머물도록 Absolute에서 Fixed로 업그레이드 */
+    position: fixed; 
     bottom: auto; right: auto;
-    top: 20px; left: 20px; /* 고정이므로 다시 px 사용해도 안전 */
-    background: rgba(20, 20, 25, 0.65); /* 모바일 가독성을 위해 살짝 짙은 배경 */
-    transform: none; /* 패널 열려도 숨지 않음 */
+    top: 20px; left: 20px; 
+    background: var(--panel-bg); /* PC 버전과 색상 통일 (스킨 호환) */
+    transform: none; 
     z-index: 9999;
   }
   #app.panel-open #language-switcher {
