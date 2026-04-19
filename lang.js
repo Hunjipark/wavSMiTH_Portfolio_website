@@ -44,19 +44,10 @@ window.i18nData = {
     "career_folder_2": "Game Projects",
     "career_1_date": "2025.07 – Present",
     "career_1_title": "ARTIVE SOUND",
-    "career_1_desc": "B2B Partner Project Audio Lead (Shift Up, Neople, Krafton, Kabam, etc.)",
-
-    "career_2_date": "2023.01 – 2025.06",
-    "career_2_title": "Freelance Game Sound Designer",
-    "career_2_desc": "Composed/Designed BGM & SFX for numerous indie/mobile games / Produced audio for MMA 2023 IVE.",
-
-    "career_3_date": "2021.01 – 2022.07",
-    "career_3_title": "The Rewind Film",
-    "career_3_desc": "Video Sound Engineer (Led sound for global brands: Samsung Galaxy S21, E-mart, IKEA)",
-
-    "career_4_date": "2018.09 – 2020.12",
-    "career_4_title": "Early Career & Education",
-    "career_4_desc": "Major in Practical Music Composition, Dong-Ah Institute of Media and Arts / Winner of Naver Grafolio Creator Pitching"
+    "career_1_desc": "Participated in BGM & SFX production for major game developers such as Shift Up, Neople, Krafton, and Kabam.",
+    "career_2_desc": "BGM & SFX Production for Games (Kangwon Land slot games, 10+ indie games, etc.) / Produced audio for Melon Music Awards 2023 IVE.",
+    "career_3_desc": "Video Sound Engineer (Sound for global brands: Samsung, E-mart, IKEA, Taylor Made, etc.)",
+    "career_4_desc": "Major in Music Composition, Dong-Ah Institute of Media and Arts / Winner of Naver Grafolio Creator Support"
   },
   kr: {
     // Main UI
@@ -103,18 +94,9 @@ window.i18nData = {
     "career_folder_2": "참여 게임 프로젝트",
     "career_1_date": "2025.07 – 현재",
     "career_1_title": "ARTIVE SOUND<br/><span class='career-kr-name'>(아티브사운드)</span>",
-    "career_1_desc": "메이저 스튜디오 B2B 파트너 프로젝트 담당 (시프트업, 네오플, 크래프톤, 카밤 등)",
-
-    "career_2_date": "2023.01 – 2025.06",
-    "career_2_title": "프리랜서 게임 사운드 디자이너",
-    "career_2_desc": "인디/모바일 게임 BGM & SFX 다수 제작 (강원랜드 슬롯, 헬럭시 등) / MMA 2023 아이브(IVE) 음원 제작",
-
-    "career_3_date": "2021.01 – 2022.07",
-    "career_3_title": "The Rewind Film<br/><span class='career-kr-name'>(더 리와인드 필름)</span>",
-    "career_3_desc": "영상 사운드 엔지니어 (삼성 갤럭시 S21, 이마트, IKEA 등 글로벌 브랜드 사운드 리드)",
-
-    "career_4_date": "2018.09 – 2020.12",
-    "career_4_title": "초기 활동 및 학력",
-    "career_4_desc": "동아방송예술대 실용음악 작곡 전공 / 네이버 그라폴리오 창작지원 피칭 수상"
+    "career_1_desc": "시프트업, 네오플, 크래프톤, 카밤 등 메이저 게임 개발사의 프로젝트 BGM & SFX 제작으로 참여.",
+    "career_2_desc": "게임 BGM & SFX 제작 (강원랜드 슬롯게임, 인디게임 10개 등) / Melon Music Award 2023 아이브(IVE) 음원 제작",
+    "career_3_desc": "영상 사운드 엔지니어 (삼성, 이마트, IKEA, Taylor Made 등 글로벌 브랜드 영상 사운드 담당)",
+    "career_4_desc": "동아방송예술대 실용음악 작곡 전공 / 네이버 그라폴리오 창작지원 수상"
   }
 };
