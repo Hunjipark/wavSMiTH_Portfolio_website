@@ -128,6 +128,14 @@
             <div class="yt-folder-title" data-i18n="sfx_folder_2">SFX Design</div>
             <div class="folder-content-wrapper">
               <div class="folder-content">
+                <!-- 0. 할케미스트 -->
+                <div class="yt-item">
+                  <h4 class="yt-song-title">Halchemist (SFX)</h4>
+                  <div class="yt-wrapper">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/RLz5ijzgbbY" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                </div>
+                <!-- 기존 영상들 -->
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_4">Game Animation_Magician Dagger</h4>
                   <div class="yt-wrapper">
@@ -234,45 +242,125 @@
       <div class="panel-content" id="panel-career" hidden>
         <h2 class="panel-title" data-i18n="panel_career_title">Career</h2>
         <p class="panel-desc" data-i18n="panel_career_desc">Work history, projects, and collaborations.</p>
-        <ul class="career-list">
-
-          <li class="career-item">
-            <span class="career-year" data-i18n="career_1_date">2025.07 – Present</span>
-            <div class="career-detail">
-              <strong data-i18n-html="career_1_title">ARTIVE SOUND</strong>
-              <span data-i18n="career_1_desc">B2B Partner Project Audio Lead (Shift Up, Neople, Krafton, Kabam,
-                etc.)</span>
+        <!-- 폴더 1: 타임라인 (기존 연혁) -->
+        <div class="yt-folder open">
+          <div class="yt-folder-title" data-i18n="career_folder_1">Timeline / History</div>
+          <div class="folder-content-wrapper">
+            <div class="folder-content">
+              <ul class="career-list">
+                <li class="career-item">
+                  <span class="career-year" data-i18n="career_1_date">2025.07 – Present</span>
+                  <div class="career-detail">
+                    <strong data-i18n-html="career_1_title">ARTIVE SOUND</strong>
+                    <span data-i18n="career_1_desc">B2B Partner Project Audio Lead (Shift Up, Neople, Krafton, Kabam, etc.)</span>
+                  </div>
+                </li>
+                <li class="career-item">
+                  <span class="career-year" data-i18n="career_2_date">2023.01 – 2025.06</span>
+                  <div class="career-detail">
+                    <strong data-i18n-html="career_2_title">Freelance Game Sound Designer</strong>
+                    <span data-i18n="career_2_desc">Composed/Designed BGM & SFX for numerous indie/mobile games / Produced audio for MMA 2023 IVE.</span>
+                  </div>
+                </li>
+                <li class="career-item">
+                  <span class="career-year" data-i18n="career_3_date">2021.01 – 2022.07</span>
+                  <div class="career-detail">
+                    <strong data-i18n-html="career_3_title">The Rewind Film</strong>
+                    <span data-i18n="career_3_desc">Video Sound Engineer (Led sound for global brands: Samsung Galaxy S21, E-mart, IKEA)</span>
+                  </div>
+                </li>
+                <li class="career-item">
+                  <span class="career-year" data-i18n="career_4_date">2018.09 – 2020.12</span>
+                  <div class="career-detail">
+                    <strong data-i18n-html="career_4_title">Early Career & Education</strong>
+                    <span data-i18n="career_4_desc">Major in Practical Music Composition, Dong-Ah Institute of Media and Arts / Winner of Naver Grafolio Creator Pitching</span>
+                  </div>
+                </li>
+              </ul>
             </div>
-          </li>
+          </div>
+        </div>
 
-          <li class="career-item">
-            <span class="career-year" data-i18n="career_2_date">2023.01 – 2025.06</span>
-            <div class="career-detail">
-              <strong data-i18n-html="career_2_title">Freelance Game Sound Designer</strong>
-              <span data-i18n="career_2_desc">Composed/Designed BGM & SFX for numerous indie/mobile games / Produced
-                audio for MMA 2023 IVE.</span>
+        <!-- 폴더 2: 갤러리 (게임 프로젝트) -->
+        <div class="yt-folder open">
+          <div class="yt-folder-title" data-i18n="career_folder_2">Game Projects</div>
+          <div class="folder-content-wrapper">
+            <div class="folder-content">
+              <div class="career-grid">
+                <!-- 메이저 스튜디오 참여작 (최상단) -->
+                <!-- 1. PUBG: BATTLEGROUNDS -->
+                <div class="career-grid-item" title="PUBG: BATTLEGROUNDS (Krafton)">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/capsule_616x353.jpg" loading="lazy" alt="PUBG: BATTLEGROUNDS">
+                </div>
+                <!-- 2. Goddess of Victory: NIKKE (모바일/PC 클라이언트 - 임시 커버) -->
+                <div class="career-grid-item" title="Goddess of Victory: NIKKE (Shift Up)">
+                  <img src="https://placehold.co/616x353/1B1B1B/D4AF37?text=Goddess+of+Victory:%5CnNIKKE&font=Montserrat" loading="lazy" alt="Goddess of Victory: NIKKE">
+                </div>
+                <!-- 3. Dungeon & Fighter Mobile (네오플 - 던파 IP 스팀 캡슐 사용) -->
+                <div class="career-grid-item" title="Dungeon & Fighter Mobile (Neople)">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/212220/capsule_616x353.jpg" loading="lazy" alt="Dungeon & Fighter Mobile">
+                </div>
+                <!-- 4. King Arthur: Legends Rise -->
+                <div class="career-grid-item" title="King Arthur: Legends Rise (Kabam)">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2279730/capsule_616x353.jpg" loading="lazy" alt="King Arthur: Legends Rise">
+                </div>
+                <!-- 5. Waltz and Jam (추가 메이저) -->
+                <div class="career-grid-item" title="Waltz and Jam (Krafton)">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2686570/capsule_616x353.jpg" loading="lazy" alt="Waltz and Jam">
+                </div>
+
+                <!-- 6. Forge of the Fae -->
+                <div class="career-grid-item" title="Forge of the Fae">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2160070/capsule_616x353.jpg" loading="lazy" alt="Forge of the Fae">
+                </div>
+                <!-- 2. 할케미스트 (Halchemist) -->
+                <div class="career-grid-item" title="Halchemist">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2571730/capsule_616x353.jpg" loading="lazy" alt="Halchemist">
+                </div>
+                <!-- 3. 데들리 트릭 (Deadly Trick) -->
+                <div class="career-grid-item" title="Deadly Trick">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3088400/capsule_616x353.jpg" loading="lazy" alt="Deadly Trick">
+                </div>
+                <!-- 4. HELLAXY (헬럭시) -->
+                <div class="career-grid-item" title="HELLAXY">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2918630/capsule_616x353.jpg" loading="lazy" alt="HELLAXY">
+                </div>
+                <!-- 5. 메이드 서바이벌: 리틀엔젤 -->
+                <div class="career-grid-item" title="Maid Survivors: Little Angels">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2771600/capsule_616x353.jpg" loading="lazy" alt="Maid Survivors: Little Angels">
+                </div>
+                <!-- 6. 꿈 속에 나 홀로 (Alone In a Dream) -->
+                <div class="career-grid-item" title="Alone In a Dream">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1546620/capsule_616x353.jpg" loading="lazy" alt="Alone In a Dream">
+                </div>
+                <!-- 7. Re Dive Wonderland -->
+                <div class="career-grid-item" title="Re Dive Wonderland">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3625350/capsule_616x353.jpg" loading="lazy" alt="Re Dive Wonderland">
+                </div>
+                <!-- 8. JIPOIZ (지포이즈) -->
+                <div class="career-grid-item" title="JIPOIZ">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2632840/capsule_616x353.jpg" loading="lazy" alt="JIPOIZ">
+                </div>
+                <!-- 9. NOMANUAL (노 매뉴얼) -->
+                <div class="career-grid-item" title="NOMANUAL">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3315750/capsule_616x353.jpg" loading="lazy" alt="NOMANUAL">
+                </div>
+                <!-- 10. Wonder Library (원더라이브러리) -->
+                <div class="career-grid-item" title="Wonder Library">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1905800/capsule_616x353.jpg" loading="lazy" alt="Wonder Library">
+                </div>
+                <!-- 11. Kona & SnowRabbit (코나와 스노래빗) -->
+                <div class="career-grid-item" title="Kona & SnowRabbit">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3985850/capsule_616x353.jpg" loading="lazy" alt="Kona & SnowRabbit">
+                </div>
+                <!-- 12. 스타더스트: 별과 마녀 -->
+                <div class="career-grid-item" title="STARDUST: Wish of Witch">
+                  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3936730/capsule_616x353.jpg" loading="lazy" alt="STARDUST: Wish of Witch">
+                </div>
+              </div>
             </div>
-          </li>
-
-          <li class="career-item">
-            <span class="career-year" data-i18n="career_3_date">2021.01 – 2022.07</span>
-            <div class="career-detail">
-              <strong data-i18n-html="career_3_title">The Rewind Film</strong>
-              <span data-i18n="career_3_desc">Video Sound Engineer (Led sound for global brands: Samsung Galaxy S21,
-                E-mart, IKEA)</span>
-            </div>
-          </li>
-
-          <li class="career-item">
-            <span class="career-year" data-i18n="career_4_date">2018.09 – 2020.12</span>
-            <div class="career-detail">
-              <strong data-i18n-html="career_4_title">Early Career & Education</strong>
-              <span data-i18n="career_4_desc">Major in Practical Music Composition, Dong-Ah Institute of Media and Arts
-                / Winner of Naver Grafolio Creator Pitching</span>
-            </div>
-          </li>
-
-        </ul>
+          </div>
+        </div>
       </div>
 
     </aside>

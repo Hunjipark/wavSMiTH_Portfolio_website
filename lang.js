@@ -36,10 +36,12 @@ window.i18nData = {
     "bgm_dnf_1": "Sirocco of the Erosion (Gray Nostalgia)",
     "bgm_dnf_2": "Sirocco of the Erosion (Gloomy Memory)",
     
-    "bgm_folder_streamer": "<span class='yt-folder-company'>Smilegate STOVE</span><br/><span class='yt-folder-game'>My Unusual Streamer!</span>",
+    "bgm_folder_streamer": "<span class='yt-folder-company'>Elif Games</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
     "bgm_streamer_1": "Broadcast Screen BGM",
 
     // Career Content
+    "career_folder_1": "Timeline / History",
+    "career_folder_2": "Game Projects",
     "career_1_date": "2025.07 – Present",
     "career_1_title": "ARTIVE SOUND",
     "career_1_desc": "B2B Partner Project Audio Lead (Shift Up, Neople, Krafton, Kabam, etc.)",
@@ -93,10 +95,12 @@ window.i18nData = {
     "bgm_dnf_1": "침식의 시로코 (잿빛 그리움)",
     "bgm_dnf_2": "침식의 시로코 (암담한 추억)",
 
-    "bgm_folder_streamer": "<span class='yt-folder-company'>Smilegate STOVE</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
+    "bgm_folder_streamer": "<span class='yt-folder-company'>엘리프 게임즈 (Elif Games)</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
     "bgm_streamer_1": "방송화면 BGM",
 
     // Career Content
+    "career_folder_1": "연혁 및 주요 이력",
+    "career_folder_2": "참여 게임 프로젝트",
     "career_1_date": "2025.07 – 현재",
     "career_1_title": "ARTIVE SOUND<br/><span class='career-kr-name'>(아티브사운드)</span>",
     "career_1_desc": "메이저 스튜디오 B2B 파트너 프로젝트 담당 (시프트업, 네오플, 크래프톤, 카밤 등)",
