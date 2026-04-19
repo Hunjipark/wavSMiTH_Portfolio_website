@@ -47,41 +47,69 @@
   --node-border:  rgba(255, 255, 255, 0.45);
 }
 
-/* 3안: 노마딕 트라이브 (파스텔 크림 & 뮤트 블루 - 밝은 테마) */
+/* 3안: 노마딕 트라이브 (파스텔 크림 & 다크 세룰리안 포인트 - 밝은 테마) */
 :root[data-theme="nomadic-tribe"] {
-  --bg:           #F5F2EB;       /* 부드러운 크림색 배경 */
+  --bg:           #F5F2EB;       
   --bg-dark:      #E6DFD3;       
-  --accent:       #4A6B8E;       /* 뮤트 네이비/블루 (진하게 가독성 강화) */
-  --accent-hover: #5C88AE;       
-  --text-primary: #1A1E26;       /* 진한 네이비-그레이 (진하게 가독성 확보) */
-  --text-muted:   #535A6B;       /* 뚜렷한 뮤트 톤으로 버튼 시인성 확보 (더 진하게) */
-  --orbit-line:   rgba(55, 60, 77, 0.15); 
-  --orbit-inner-line: rgba(55, 60, 77, 0.25);
-  --orbit-glow:   rgba(127, 162, 189, 0.4);
-  --panel-bg:     rgba(215, 224, 235, 0.92); /* 너무 밝지 않은 데님 블루-그레이 톤 유지하되 살짝 더 밝게 투명도(0.92) 확보 */
-  --panel-border: rgba(55, 60, 77, 0.18);
+  --accent:       #08457E;       /* Dark Cerulean (요청하신 정확한 색상) */
+  --accent-hover: #0A569D;       
+  --text-primary: #1A1E26;       /* 일반 텍스트는 차분한 다크 그레이 유지 */
+  --text-muted:   #535A6B;       
+  --orbit-line:   rgba(8, 69, 126, 0.08); 
+  --orbit-inner-line: rgba(8, 69, 126, 0.15);
+  --orbit-glow:   rgba(8, 69, 126, 0.12);
+  --panel-bg:     rgba(215, 224, 235, 0.95); 
+  --panel-border: rgba(8, 69, 126, 0.12);
   --node-bg:      rgba(255, 255, 255, 0.6);
-  --node-border:  #4A6B8E; /* 초록기 도는 원형 버튼 테두리 */
+  --node-border:  #1A1E26; 
+  
+  --lang-active:  #08457E;       
+  --lang-inactive: #8BA1B6;      
 }
 
-/* 4안: 퍼플 클라우드 (몽환적인 밤하늘 & 좌측 상단 은은한 보라빛 구름) */
+/* 4안: 퍼플 클라우드 (몽환적인 밤하늘 & 은하수 파티클) */
 :root[data-theme="purple-cloud"] {
-  --bg:           #241544;       /* 기존(#170D2B)보다 한 톤 밝아지고 채도가 오른 우주색(딥-인디고) */
-  --bg-dark:      #130925;       
-  --accent:       #F3C15D;       /* 일러스트레이터 속 노란 버튼과 일치하는 옐로우 포인트 */
+  --bg:           #1A0B2E;       /* 더 깊고 진한 우주색 */
+  --bg-dark:      #0D0518;       
+  --accent:       #F3C15D;       
   --accent-hover: #FFE2A6;       
   --text-primary: #FFFFFF;
   --text-muted:   rgba(255, 255, 255, 0.60);
-  --orbit-line:   rgba(255, 255, 255, 0.15);
-  --orbit-inner-line: rgba(243, 193, 93, 0.35); /* 궤도 안쪽은 달빛 같은 노란 조명 */
-  --orbit-glow:   rgba(142, 68, 173, 0.55);      /* 발광 효과는 신비로운 자수정(Amethyst) 색상 */
-  --panel-bg:     rgba(23, 13, 43, 0.70);
+  --orbit-line:   rgba(255, 255, 255, 0.12);
+  --orbit-inner-line: rgba(243, 193, 93, 0.25);
+  --orbit-glow:   rgba(142, 68, 173, 0.45);
+  --panel-bg:     rgba(23, 13, 43, 0.75);
   --panel-border: rgba(255, 255, 255, 0.12);
-  --node-bg:      rgba(255, 255, 255, 0.15);
-  --node-border:  #A260C6;       /* 부드러운 바이올렛 테두리 */
-  
-  /* [커스텀 아트웍] 요청하신 좌측 상단부터 대각선으로 은은하게 번지는 신비로운 보라/마젠타 빛 무리 */
-  --bg-cloud: radial-gradient(ellipse 90vw 110vh at 0% -5%, rgba(133, 44, 185, 0.38) 0%, rgba(77, 24, 148, 0.18) 42%, transparent 80%);
+  --node-bg:      rgba(255, 255, 255, 0.12);
+  --node-border:  #A260C6;       
+
+  /* [고도화] 레이어드 그래디언트로 성운 느낌 구현 */
+  --bg-cloud: 
+    radial-gradient(circle at 20% 30%, rgba(133, 44, 185, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(77, 24, 148, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(41, 10, 89, 0.2) 0%, transparent 80%);
+}
+
+/* Purple Cloud 전용 별무리(Particle) 레이어 생성 */
+[data-theme="purple-cloud"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: 
+    radial-gradient(1px 1px at 10% 10%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 25% 45%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 60% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 15%, #fff, transparent),
+    radial-gradient(1.3px 1.3px at 45% 70%, #fff, transparent);
+  background-size: 350px 350px; /* 패턴 반복 */
+  opacity: 0.25;
+  animation: bgFloating 60s linear infinite;
+}
+
+@keyframes bgFloating {
+  from { background-position: 0 0; }
+  to   { background-position: 350px 700px; }
 }
 
 /* 5안: 사이버 트렁크 (네온 핑크 & 사이언 블루 - 일러스트 감성) */
@@ -510,8 +538,8 @@ body {
 
 .career-detail strong {
   font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: var(--accent); /* 강조색(Deep Navy) 적용 */
   line-height: 1.4;
 }
 
@@ -726,7 +754,7 @@ body {
 .lang-btn {
   background: none;
   border: none;
-  color: var(--text-muted);
+  color: var(--lang-inactive, var(--text-muted));
   font-family: 'Outfit', 'Pretendard', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
@@ -736,7 +764,7 @@ body {
 }
 
 .lang-btn.active, .lang-btn:hover {
-  color: var(--accent);
+  color: var(--lang-active, var(--accent));
 }
 
 .lang-sep {
@@ -774,7 +802,14 @@ body {
   
   /* 모바일용 오빗 레이블 글씨 밸런스 축소 */
   .title-main { font-size: 1.6rem; }
-  .title-sub { font-size: 0.65rem; margin-top: 0.35rem; }
+  .title-sub { 
+    font-size: 0.54rem; 
+    margin-top: 0.3rem; 
+    letter-spacing: -0.01em; /* 자간을 미세하게 좁혀 줄바꿈 방어 */
+    white-space: nowrap;    /* 텍스트가 컨테이너를 넘더라도 줄바꿈되지 않게 설정 (부모가 flex나 block일 때 유용) */
+    display: block;
+  }
+  .title-sub br { display: block; content: ""; margin-top: 2px; } /* BR 태그만 줄바꿈 허용 */
   .orbit-label { font-size: 0.75rem; letter-spacing: 0.1em; text-shadow: none; }
   .orbit-sub-label { font-size: 0.55rem; }
   .orbit-node { width: 12px; height: 12px; } /* 버튼 크기도 아주 살짝 축소 */
