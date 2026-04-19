@@ -532,7 +532,7 @@ body {
 /* ---- Career Game Grid (인스타그램 갤러리) ---- */
 .career-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 기본 PC 3열 세팅 */
+  grid-template-columns: repeat(2, 1fr); /* PC에서도 모바일처럼 시원한 2열 세팅 */
   gap: 12px;
   padding-top: 5px;
 }
