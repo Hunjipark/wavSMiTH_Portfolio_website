@@ -117,8 +117,9 @@ body {
 /* ---- App Wrapper ---- */
 #app {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%; /* 모바일 툴바 잘림 방지 기본값 */
+  height: 100dvh; /* 최신 브라우저 동적 툴바 완벽 대응 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -313,6 +314,7 @@ body {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain; /* 터치 스크롤 시 배경이 같이 스크롤되는 꿀렁임 현상 완벽 차단 */
   scrollbar-gutter: stable; /* 스크롤바가 생기거나 말거나 레이아웃 뼈대 고정 */
   padding: 30px 40px 20px;
 }
@@ -682,6 +684,19 @@ body {
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
+  /* [핵심] 유저가 아래로 스와이프하여 모바일 주소창을 숨길 수 있도록 강제 스크롤 허용 */
+  html, body {
+    overflow-y: auto; 
+    height: auto;
+    min-height: 140vh; /* 여유 스크롤 공간 창출 (주소창 밀어내기 용도) */
+  }
+  body {
+    background-attachment: fixed; /* 스크롤해도 배경색 그라데이션은 끌려올라가지 않게 단단히 고정 */
+  }
+  #app {
+    height: 140vh; /* 뼈대도 같이 길게 늘림 */
+  }
+
   :root {
     --orbit-size: 240px; /* 오빗 중심축을 확 줄여 글씨 잘림 방지 */
     --panel-width: 100vw;
@@ -709,12 +724,14 @@ body {
     transform: translate(-50%, -50%) scale(0.68);
   }
 
-  /* 언어 전환 버튼 모바일 이동 (가려지지 않게 최상단 좌측) */
+  /* 언어 전환 버튼 모바일 이동 (화면 렌즈 기준 고정) */
   #language-switcher {
+    position: fixed; /* 스크롤해도 항상 좌측 상단에 머물도록 Absolute에서 Fixed로 업그레이드 */
     bottom: auto; right: auto;
-    top: 20px; left: 20px;
+    top: 20px; left: 20px; /* 고정이므로 다시 px 사용해도 안전 */
     background: rgba(20, 20, 25, 0.65); /* 모바일 가독성을 위해 살짝 짙은 배경 */
     transform: none; /* 패널 열려도 숨지 않음 */
+    z-index: 9999;
   }
   #app.panel-open #language-switcher {
     transform: none; 
