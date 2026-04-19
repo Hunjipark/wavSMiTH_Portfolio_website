@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // =============================================
   // 1. 오빗 노드 + 외부 레이블 각도 배치
   // =============================================
-  const LABEL_OFFSET = 58; // 버튼 반지름(26) + 여백(32)
 
   function placeNodes() {
     const container = document.getElementById('orbit-container');
@@ -77,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', placeNodes);
 
   // =============================================
-  // 3. 패널 열기/닫기 — GSAP 트랜지션
+  // 2. 패널 열기/닫기 — GSAP 트랜지션
   // =============================================
   const app         = document.getElementById('app');
   const panel       = document.getElementById('content-panel');
@@ -226,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =============================================
-  // 4. Wavesurfer.js 슬라이드바 파형 플레이어
+  // 3. Wavesurfer.js 슬라이드바 파형 플레이어
   // =============================================
   let waveInstances  = [];
   const initializedWaves = new Set();
@@ -288,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =============================================
-  // 5. 구도 GSAP 초기 등장 애니메이션
+  // 4. 구도 GSAP 초기 등장 애니메이션
   // =============================================
   gsap.from('#orbit-container', {
     scale: 0.85, opacity: 0, duration: 1.2, ease: 'elastic.out(1, 0.6)',
