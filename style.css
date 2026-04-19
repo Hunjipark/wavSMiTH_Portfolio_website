@@ -5,11 +5,12 @@
 /* [공통 뼈대 변수] 스킨과 상관없이 고정되는 뼈대 수치 */
 :root {
   --radius-panel: 28px;
-  --panel-width:  380px; 
+  --panel-width:  450px; 
   --orbit-size:   420px;
   --ease-swing: cubic-bezier(0.4, 0, 0.2, 1);
   --transition: 0.5s var(--ease-swing);
   --bg-cloud: none; /* 기본값: 배경 구름 레이어 끄기 */
+  --bg-pattern: none; /* 기본값: 배경 패턴 레이어 끄기 */
 }
 
 /* 1안: 민트 & 옐로우 (현재 메인 스킨) */
@@ -83,6 +84,29 @@
   --bg-cloud: radial-gradient(ellipse 90vw 110vh at 0% -5%, rgba(133, 44, 185, 0.38) 0%, rgba(77, 24, 148, 0.18) 42%, transparent 80%);
 }
 
+/* 5안: 사이버 트렁크 (네온 핑크 & 사이언 블루 - 일러스트 감성) */
+:root[data-theme="cyber-trunk"] {
+  --bg:           #FFFFFF;       /* 기본 바탕은 깨끗한 화이트 */
+  --bg-dark:      #F0F8FF;       
+  --accent:       #FF2D55;       /* 식물 잎사귀의 강렬한 마젠타 핑크 */
+  --accent-hover: #FF66B2;       
+  --text-primary: #1A1A1A;       /* 진한 블랙 (사이버펑크 로고 느낌) */
+  --text-muted:   #666666;       
+  --orbit-line:   rgba(0, 0, 0, 0.08); 
+  --orbit-inner-line: rgba(0, 229, 255, 0.5); /* 기계 부위의 일렉트릭 블루 포인트 */
+  --orbit-glow:   rgba(255, 45, 85, 0.25);
+  --panel-bg:     rgba(255, 255, 255, 0.82); /* 맑은 화이트 유리 느낌 */
+  --panel-border: rgba(0, 0, 0, 0.08);
+  --node-bg:      rgba(255, 45, 85, 0.1);
+  --node-border:  #FF2D55;
+  
+  /* [원복] 처음의 깨끗한 3단 그라데이션 상태로 복구 (상단 핑크 - 중앙 화이트 - 하단 블루) */
+  --bg-cloud: linear-gradient(180deg, rgba(255, 45, 85, 0.15) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 229, 255, 0.12) 100%);
+
+  /* 나뭇잎 패턴 제거 */
+  --bg-pattern: none;
+}
+
 /* ---- Reset & Base ---- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -97,7 +121,8 @@ html, body {
 }
 
 body {
-  background: var(--bg-cloud), linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+  background: var(--bg-pattern), var(--bg-cloud), linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+  background-repeat: repeat, no-repeat, no-repeat;
   color: var(--text-primary);
   display: flex;
   align-items: center;
@@ -134,15 +159,16 @@ body {
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1); /* 시작점을 scale(1)로 명시하여 팝 현상 제거 */
   will-change: transform;
-  transition: left var(--transition), transform var(--transition);
+  transition: left var(--transition), top var(--transition), transform var(--transition);
   z-index: 10;
 }
 
-/* 패널 열릴 때 오빗을 좌측으로 당기는 상태 */
+/* 패널 열릴 때 오빗 이동 및 크기 조절 (원복된 쫀쫀한 박자감) */
 #app.panel-open #orbit-section {
-  left: 28%;
+  left: 30%;
+  transform: translate(-50%, -50%) scale(0.75);
 }
 
 /* ---- Orbit Container ---- */
@@ -202,7 +228,7 @@ body {
   font-size: clamp(1.8rem, 5vw, 2.8rem);
   letter-spacing: 0.08em;
   color: var(--text-primary);
-  text-shadow: 0 0 24px var(--orbit-glow);
+  /* text-shadow 제거: 더 깔끔하고 현대적인 디자인을 위함 */
   line-height: 1;
 }
 
@@ -271,7 +297,6 @@ body {
   text-align: center;
   line-height: 1.4;
   pointer-events: none;
-  text-shadow: 0 0 12px var(--orbit-glow);
   transition: color 0.25s;
 }
 
@@ -367,7 +392,7 @@ body {
   letter-spacing: 0.06em;
   color: var(--accent);
   margin-bottom: 6px;
-  text-shadow: 0 0 16px var(--orbit-glow);
+  /* text-shadow 제거: 패널 내 가독성 극대화 */
 }
 
 .panel-desc {
@@ -546,11 +571,17 @@ body {
 }
 
 .yt-folder-title:hover .yt-folder-company {
-  color: #fff;
+  color: var(--accent); /* 하얀색 고정 대신 테마 포인트 컬러로 변경하여 가독성 확보 */
 }
 
-.yt-folder-title:hover .yt-folder-game {
-  color: var(--accent-hover);
+/* cyber-trunk 테마에서는 호버 시 너무 밝아지지 않도록 별도 조절 */
+[data-theme="cyber-trunk"] .yt-folder-title:hover .yt-folder-company {
+  color: #1A1A1A; /* 기본 텍스트색 정도로만 유지 */
+}
+
+.yt-folder-title:hover .yt-folder-game,
+.yt-folder-title:hover {
+  color: var(--accent-hover); /* SFX 폴더를 포함하여 전체적으로 호버 효과 적용 */
 }
 
 /* 모던한 + / × 아이콘 애니메이션 */
@@ -562,13 +593,19 @@ body {
   transform: translateY(-50%) rotate(0deg);
   font-size: 1.4rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
+}
+
+/* cyber-trunk 테마 전용: 아이콘 가시성 확보 (차분한 파스텔 블루) */
+[data-theme="cyber-trunk"] .yt-folder-title::after {
+  color: #A5BFD1;
+  opacity: 1;
 }
 
 .yt-folder.open .yt-folder-title::after {
   transform: translateY(-50%) rotate(45deg); /* +가 45도 회전해 ×가 됨 */
-  color: rgba(255, 255, 255, 0.3);
+  opacity: 0.5;
 }
 
 /* CSS Grid 0fr -> 1fr 트릭으로 완벽하게 부드러운 열고 닫힘 */
@@ -705,7 +742,7 @@ body {
   /* 모바일용 오빗 레이블 글씨 밸런스 축소 */
   .title-main { font-size: 1.6rem; }
   .title-sub { font-size: 0.65rem; margin-top: 0.35rem; }
-  .orbit-label { font-size: 0.75rem; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(0,0,0,0.6); }
+  .orbit-label { font-size: 0.75rem; letter-spacing: 0.1em; text-shadow: none; }
   .orbit-sub-label { font-size: 0.55rem; }
   .orbit-node { width: 12px; height: 12px; } /* 버튼 크기도 아주 살짝 축소 */
 

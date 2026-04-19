@@ -15,10 +15,14 @@ window.i18nData = {
     "panel_bgm_title": "BGM",
 
     // SFX Content
-    "sfx_folder_1": "Game Sound Redesign",
-    "sfx_item_1": "Horizon Forbidden West (Redesign)",
-    "sfx_item_2": "Granblue Fantasy: Relink (Redesign)",
-    "sfx_item_3": "Dragon's Dogma 2 (Redesign)",
+    "sfx_folder_1": "Cinematic ReDesign",
+    "sfx_folder_2": "SFX Design",
+    "sfx_folder_3": "Ambience Design",
+    "sfx_item_1": "Granblue Fantasy: Relink",
+    "sfx_item_2": "Dragon's Dogma 2",
+    "sfx_item_3": "Horizon Forbidden West",
+    "sfx_item_4": "Game Animation_Magician Dagger",
+    "sfx_item_5": "Game Animation_GuitarMan",
     "panel_bgm_desc": "Background Music — In Game",
     "panel_career_title": "Career",
     "panel_career_desc": "Work history, projects, and collaborations.",
@@ -31,6 +35,9 @@ window.i18nData = {
     "bgm_folder_dnf": "<span class='yt-folder-company'>Neople</span><br/><span class='yt-folder-game'>Dungeon & Fighter Mobile</span>",
     "bgm_dnf_1": "Sirocco of the Erosion (Gray Nostalgia)",
     "bgm_dnf_2": "Sirocco of the Erosion (Gloomy Memory)",
+    
+    "bgm_folder_streamer": "<span class='yt-folder-company'>Smilegate STOVE</span><br/><span class='yt-folder-game'>My Unusual Streamer!</span>",
+    "bgm_streamer_1": "Broadcast Screen BGM",
 
     // Career Content
     "career_1_date": "2025.07 – Present",
@@ -65,10 +72,14 @@ window.i18nData = {
     "panel_bgm_title": "BGM",
 
     // SFX Content
-    "sfx_folder_1": "게임 사운드 리디자인",
-    "sfx_item_1": "호라이즌 포비든 웨스트 (Redesign)",
-    "sfx_item_2": "그랑블루 판타지: 리링크 (Redesign)",
-    "sfx_item_3": "드래곤즈 도그마 2 (Redesign)",
+    "sfx_folder_1": "Cinematic ReDesign",
+    "sfx_folder_2": "SFX Design",
+    "sfx_folder_3": "Ambience Design",
+    "sfx_item_1": "Granblue Fantasy: Relink",
+    "sfx_item_2": "Dragon's Dogma 2",
+    "sfx_item_3": "Horizon Forbidden West",
+    "sfx_item_4": "Game Animation_Magician Dagger",
+    "sfx_item_5": "Game Animation_GuitarMan",
     "panel_bgm_desc": "인게임 주요 테마 및 BGM 제작",
     "panel_career_title": "Career",
     "panel_career_desc": "참여 게임 프로젝트, 사운드 제작 연혁",
@@ -81,6 +92,9 @@ window.i18nData = {
     "bgm_folder_dnf": "<span class='yt-folder-company'>Neople</span><br/><span class='yt-folder-game'>던전앤파이터 모바일</span>",
     "bgm_dnf_1": "침식의 시로코 (잿빛 그리움)",
     "bgm_dnf_2": "침식의 시로코 (암담한 추억)",
+
+    "bgm_folder_streamer": "<span class='yt-folder-company'>Smilegate STOVE</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
+    "bgm_streamer_1": "방송화면 BGM",
 
     // Career Content
     "career_1_date": "2025.07 – 현재",

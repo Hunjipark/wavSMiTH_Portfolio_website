@@ -76,17 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
       l.classList.toggle('active', l.dataset.category === category)
     );
 
-    // CSS 클래스 추가 → CSS transition 발동
+    // 패널이 이미 열려 있는지 확인 (애니메이션 분기용)
+    const isAlreadyOpen = app.classList.contains('panel-open');
+
+    // CSS 클래스 추가 → CSS transition 발동 (오빗 이동 및 축소)
     app.classList.add('panel-open');
     panel.setAttribute('aria-hidden', 'false');
 
     // GSAP 오빗 미세 탄성 이펙트
-    gsap.fromTo('#orbit-container',
-      { scale: 1 },
-      { scale: 0.92, duration: 0.3, ease: 'power2.out',
-        onComplete: () => gsap.to('#orbit-container', { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' })
-      }
-    );
+    // - 이미 패널이 열려 있는 상태에서 카테고리만 바꿀 때 실행 (사용자 선호 효과)
+    // - 처음 열릴 때는 실행하지 않음 (부드러운 축소 유지)
+    if (isAlreadyOpen) {
+      gsap.fromTo('#orbit-container',
+        { scale: 1 },
+        { scale: 0.92, duration: 0.3, ease: 'power2.out',
+          onComplete: () => gsap.to('#orbit-container', { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' })
+        }
+      );
+    }
 
     // Wavesurfer 초기화 (패널 열린 뒤 약간 딜레이)
     setTimeout(() => initWaveforms(category), 450);
