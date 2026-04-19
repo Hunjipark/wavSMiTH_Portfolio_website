@@ -47,23 +47,23 @@
   --node-border:  rgba(255, 255, 255, 0.45);
 }
 
-/* 3안: 노마딕 트라이브 (파스텔 크림 & 다크 세룰리안 포인트 - 밝은 테마) */
+/* 3안: 노마딕 트라이브 (파스텔 크림 & 딥 세룰리안 포인트 - 밝은 테마) */
 :root[data-theme="nomadic-tribe"] {
   --bg:           #F5F2EB;       
   --bg-dark:      #E6DFD3;       
-  --accent:       #08457E;       /* Dark Cerulean (요청하신 정확한 색상) */
-  --accent-hover: #0A569D;       
-  --text-primary: #1A1E26;       /* 일반 텍스트는 차분한 다크 그레이 유지 */
+  --accent:       #165296;       /* 사용자 지정 정확한 색상 (HEX: #165296) */
+  --accent-hover: #1b63b5;       
+  --text-primary: #1A1E26;       
   --text-muted:   #535A6B;       
-  --orbit-line:   rgba(8, 69, 126, 0.08); 
-  --orbit-inner-line: rgba(8, 69, 126, 0.15);
-  --orbit-glow:   rgba(8, 69, 126, 0.12);
+  --orbit-line:   rgba(22, 82, 150, 0.10); 
+  --orbit-inner-line: rgba(22, 82, 150, 0.20);
+  --orbit-glow:   rgba(22, 82, 150, 0.15);
   --panel-bg:     rgba(215, 224, 235, 0.95); 
-  --panel-border: rgba(8, 69, 126, 0.12);
+  --panel-border: rgba(22, 82, 150, 0.15);
   --node-bg:      rgba(255, 255, 255, 0.6);
   --node-border:  #1A1E26; 
   
-  --lang-active:  #08457E;       
+  --lang-active:  #165296;       
   --lang-inactive: #8BA1B6;      
 }
 
