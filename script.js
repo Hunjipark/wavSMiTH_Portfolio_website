@@ -294,5 +294,55 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   // 노드/레이블에 GSAP 적용 안 함 — transform 충돌 법판
 
+  // =============================================
+  // 6. 모바일 Swipe & PC Drag 기반 테마 스위칭 시스템
+  // =============================================
+  const themes = ['mint-yellow', 'dark-gold', 'nomadic-tribe', 'purple-cloud', 'cyber-trunk'];
+  // index.html 에 선언된 기본 data-theme 값을 시작점으로 인식
+  let currentThemeIndex = themes.indexOf(document.documentElement.getAttribute('data-theme'));
+  if (currentThemeIndex === -1) currentThemeIndex = 0;
+
+  const centerTextObj = document.getElementById('orbit-center-text');
+  let startX = 0;
+
+  function handleSwipeStart(e) {
+    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  }
+
+  function handleSwipeEnd(e) {
+    const endX = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+    const diff = endX - startX;
+
+    // 50px 이상 이동했을 때만 스와이프로 인식
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // 우측 스와이프: 이전 테마
+        currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
+      } else {
+        // 좌측 스와이프: 다음 테마
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      }
+
+      document.documentElement.setAttribute('data-theme', themes[currentThemeIndex]);
+
+      // 전환 피드백: GSAP 탄성 바운스
+      gsap.fromTo(centerTextObj,
+        { x: diff > 0 ? -15 : 15 },
+        { x: 0, duration: 0.6, ease: 'elastic.out(1.2, 0.5)' }
+      );
+    }
+  }
+
+  if (centerTextObj) {
+    centerTextObj.style.cursor = 'grab';
+    centerTextObj.style.userSelect = 'none';
+
+    // 모바일 터치 이벤트
+    centerTextObj.addEventListener('touchstart', handleSwipeStart, { passive: true });
+    centerTextObj.addEventListener('touchend', handleSwipeEnd);
+    // PC 마우스 드래그 이벤트
+    centerTextObj.addEventListener('mousedown', handleSwipeStart);
+    centerTextObj.addEventListener('mouseup', handleSwipeEnd);
+  }
 
 });
