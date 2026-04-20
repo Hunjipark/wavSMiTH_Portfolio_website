@@ -9,7 +9,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =============================================
-  // 0. Ambience Design 무작위 유튜브 로딩 (videos.js 데이터 참조)
+  // 0. 초기화: 중앙 텍스트 정렬 (CSS 충돌 방지 및 쏠림 해결)
+  // =============================================
+  const centerTextObj = document.getElementById('orbit-center-text');
+  if (centerTextObj) {
+    // CSS에서 떼어낸 정렬 로직을 GSAP으로 통합하여 쏠림을 원천 차단합니다.
+    gsap.set(centerTextObj, { xPercent: -48.5, yPercent: -54, x: 0, y: 0 });
+  }
+
+  // 0-1. Ambience Design 무작위 유튜브 로딩 (videos.js 데이터 참조)
   // =============================================
   const ambienceContent = document.getElementById('ambience-content');
   if (ambienceContent && typeof ambienceVideos !== 'undefined') {
@@ -295,54 +303,77 @@ document.addEventListener('DOMContentLoaded', () => {
   // 노드/레이블에 GSAP 적용 안 함 — transform 충돌 법판
 
   // =============================================
-  // 6. 모바일 Swipe & PC Drag 기반 테마 스위칭 시스템
+  // 6. 고도화된 테마 스위칭 시스템 (시작점 제한 + 전역 거리 추적)
   // =============================================
   const themes = ['mint-yellow', 'dark-gold', 'nomadic-tribe', 'purple-cloud', 'cyber-trunk'];
-  // index.html 에 선언된 기본 data-theme 값을 시작점으로 인식
   let currentThemeIndex = themes.indexOf(document.documentElement.getAttribute('data-theme'));
   if (currentThemeIndex === -1) currentThemeIndex = 0;
 
-  const centerTextObj = document.getElementById('orbit-center-text');
+  let isDragging = false;
   let startX = 0;
 
-  function handleSwipeStart(e) {
+  // 6-1. 제스처 시작: 반드시 제목 영역(centerTextObj) 내부여야 함
+  function handleGestureStart(e) {
+    isDragging = true;
     startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    if (centerTextObj) centerTextObj.style.cursor = 'grabbing';
+
+    // 전역 추적을 위해 리스너를 window에 바인딩
+    window.addEventListener('mousemove', handleGestureMove);
+    window.addEventListener('mouseup', handleGestureEnd);
+    window.addEventListener('touchmove', handleGestureMove, { passive: false });
+    window.addEventListener('touchend', handleGestureEnd);
   }
 
-  function handleSwipeEnd(e) {
+  function handleGestureMove(e) {
+    if (!isDragging) return;
+    // 드래그 중 브라우저 기본 동작(스크롤 등) 방해 방지
+    if (e.cancelable) e.preventDefault();
+  }
+
+  // 6-2. 제스처 종료: 시작 영역과 상관없이 '이동 거리'가 Orbit 지름의 2/3 이상이면 트리거
+  function handleGestureEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    if (centerTextObj) centerTextObj.style.cursor = 'grab';
+
     const endX = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
     const diff = endX - startX;
 
-    // 50px 이상 이동했을 때만 스와이프로 인식
-    if (Math.abs(diff) > 50) {
+    // 트리거 거리 계산: 사용자 지정 수치인 180px를 임계값으로 사용
+    const threshold = 180; 
+
+    if (Math.abs(diff) > threshold) {
       if (diff > 0) {
-        // 우측 스와이프: 이전 테마
         currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
       } else {
-        // 좌측 스와이프: 다음 테마
         currentThemeIndex = (currentThemeIndex + 1) % themes.length;
       }
 
       document.documentElement.setAttribute('data-theme', themes[currentThemeIndex]);
 
-      // 전환 피드백: GSAP 탄성 바운스
+      // 강력한 바운스 피드백 (정렬값을 보존하면서 x축만 튕김)
       gsap.fromTo(centerTextObj,
-        { x: diff > 0 ? -15 : 15 },
-        { x: 0, duration: 0.6, ease: 'elastic.out(1.2, 0.5)' }
+        { x: diff > 0 ? -25 : 25 },
+        { x: 0, duration: 0.85, ease: 'elastic.out(1, 0.3)' }
       );
+    } else {
+      // 거리가 부족할 시 가벼운 흔들림 피드백 (미작동 알림)
+      gsap.to(centerTextObj, { x: 0, duration: 0.4, ease: 'power2.out' });
     }
+
+    // 전역 리스너 제거
+    window.removeEventListener('mousemove', handleGestureMove);
+    window.removeEventListener('mouseup', handleGestureEnd);
+    window.removeEventListener('touchmove', handleGestureMove);
+    window.removeEventListener('touchend', handleGestureEnd);
   }
 
   if (centerTextObj) {
     centerTextObj.style.cursor = 'grab';
-    centerTextObj.style.userSelect = 'none';
-
-    // 모바일 터치 이벤트
-    centerTextObj.addEventListener('touchstart', handleSwipeStart, { passive: true });
-    centerTextObj.addEventListener('touchend', handleSwipeEnd);
-    // PC 마우스 드래그 이벤트
-    centerTextObj.addEventListener('mousedown', handleSwipeStart);
-    centerTextObj.addEventListener('mouseup', handleSwipeEnd);
+    // 시작 리스너는 여전히 센터 텍스트 영역에만 걸어 "제한된 시작 영역"을 확보함
+    centerTextObj.addEventListener('mousedown', handleGestureStart);
+    centerTextObj.addEventListener('touchstart', handleGestureStart, { passive: true });
   }
 
 });

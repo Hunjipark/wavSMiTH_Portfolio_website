@@ -267,11 +267,16 @@ body {
 #orbit-center-text {
   position: absolute;
   top: 50%; left: 50%;
-  /* 폰트 커닝 및 시각적 무게중심을 완벽히 맞추기 위해 X를 우측으로(-48.5%), Y를 상단으로(-54%) 보정합니다 */
-  transform: translate(-48.5%, -54%);
+  /* 쏠림 방지를 위해 정렬 로직을 script.js (GSAP)로 이관합니다. 초기 위치는 JS에서 잡습니다. */
   text-align: center;
   user-select: none;
-  pointer-events: none;
+  pointer-events: auto;
+  z-index: 50;
+  /* 제목과 부제목을 감싸는 가상의 사각형 히트박스 (오빗 내부) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .title-main {
