@@ -295,4 +295,58 @@ document.addEventListener('DOMContentLoaded', () => {
   // 노드/레이블에 GSAP 적용 안 함 — transform 충돌 법판
 
 
+  // =============================================
+  // 6. 모바일 Swipe & PC Drag 기반 테마 스위칭 시스템
+  // =============================================
+  const themes = ['mint-yellow', 'dark-gold', 'nomadic-tribe', 'purple-cloud', 'cyber-trunk'];
+  // index.html 에 있는 기본 테마 값을 찾아 시작점 설정
+  let currentThemeIndex = themes.indexOf(document.documentElement.getAttribute('data-theme')) || 0;
+  if(currentThemeIndex === -1) currentThemeIndex = 0;
+
+  const centerTextObj = document.getElementById('orbit-center-text');
+  let startX = 0;
+  
+  function handleSwipeStart(e) {
+    // 터치인지 마우스 클릭인지 구분하여 시작 x위치 반환
+    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  }
+  
+  function handleSwipeEnd(e) {
+    const endX = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+    const diff = endX - startX;
+    
+    // 50px 이상 이동했을 때만 스와이프로 인식 (반응 감도)
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // 우측 스와이프: 이전 테마로
+        currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
+      } else {
+        // 좌측 스와이프: 다음 테마로
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      }
+      
+      // DOM 에 새 테마 적용
+      document.documentElement.setAttribute('data-theme', themes[currentThemeIndex]);
+      
+      // 사용자에게 전환되었음을 시각적으로 알리는 꿀렁임(Bounce) 피드백
+      gsap.fromTo(centerTextObj, 
+        { x: diff > 0 ? -15 : 15 }, 
+        { x: 0, duration: 0.6, ease: 'elastic.out(1.2, 0.5)' }
+      );
+    }
+  }
+
+  // 조작부 마운트
+  if(centerTextObj) {
+    centerTextObj.style.cursor = 'grab';         // PC 유저에게 끌기 가능 힌트
+    centerTextObj.style.userSelect = 'none';     // 드래그 중 텍스트가 파랗게 지정되는 현상 방지
+    
+    // 모바일 터치 이벤트
+    centerTextObj.addEventListener('touchstart', handleSwipeStart, {passive: true});
+    centerTextObj.addEventListener('touchend', handleSwipeEnd);
+    // PC 마우스 제스처
+    centerTextObj.addEventListener('mousedown', handleSwipeStart);
+    centerTextObj.addEventListener('mouseup', handleSwipeEnd);
+  }
+
 });
