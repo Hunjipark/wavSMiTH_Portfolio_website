@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // =============================================
   const centerTextObj = document.getElementById('orbit-center-text');
   if (centerTextObj) {
-    // CSS에서 떼어낸 정렬 로직을 GSAP으로 통합하여 쏠림을 원천 차단합니다.
+    // xPercent/yPercent: CSS top:50%/left:50% 기준에서의 미세 보정값.
+    // Space Mono 폰트 + 현재 텍스트 내용 기준으로 시각적 정중앙에 맞춰 조율된 수치입니다.
+    // 폰트나 텍스트 내용 변경 시 재조율이 필요합니다.
     gsap.set(centerTextObj, { xPercent: -48.5, yPercent: -54, x: 0, y: 0 });
   }
 
@@ -264,7 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
           height:        44,
           normalize:     true,
           interact:      true,   // 클릭해서 seek 가능
-          backend:       'WebAudio',
         });
 
         ws.setVolume(0.8);
@@ -373,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
     centerTextObj.style.cursor = 'grab';
     // 시작 리스너는 여전히 센터 텍스트 영역에만 걸어 "제한된 시작 영역"을 확보함
     centerTextObj.addEventListener('mousedown', handleGestureStart);
-    centerTextObj.addEventListener('touchstart', handleGestureStart, { passive: true });
+    centerTextObj.addEventListener('touchstart', handleGestureStart, { passive: false });
   }
 
 });

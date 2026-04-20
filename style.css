@@ -460,77 +460,7 @@ body {
   line-height: 1.6;
 }
 
-/* ---- Track List ---- */
-.track-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
 
-.track-item {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid var(--panel-border);
-  border-radius: 14px;
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: background 0.2s;
-}
-
-.track-item:hover {
-  background: rgba(255,225,53,0.10);
-}
-
-.track-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.track-name {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.track-genre {
-  font-size: 0.68rem;
-  color: var(--accent);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.waveform-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.waveform {
-  flex: 1;
-  height: 40px;
-}
-
-.play-btn {
-  background: var(--accent);
-  border: none;
-  border-radius: 50%;
-  width: 34px; height: 34px;
-  font-size: 0.85rem;
-  color: #004d3a;
-  cursor: pointer;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.play-btn:hover {
-  transform: scale(1.12);
-  box-shadow: 0 0 16px var(--orbit-glow);
-}
 
 /* ---- Career List ---- */
 .career-list {
@@ -572,13 +502,7 @@ body {
   line-height: 1.4;
 }
 
-.career-kr-name {
-  font-weight: 400;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  display: block; /* 줄바꿈 후 살짝 띄우기 위함 */
-  margin-top: 1px;
-}
+
 
 .career-detail span {
   font-size: 0.75rem;
@@ -619,10 +543,7 @@ body {
   display: block;
 }
 
-/* ---- Scrollbar ---- */
-#content-panel::-webkit-scrollbar { width: 4px; }
-#content-panel::-webkit-scrollbar-track { background: transparent; }
-#content-panel::-webkit-scrollbar-thumb { background: rgba(255,225,53,0.35); border-radius: 2px; }
+
 
 
 /* ---- YouTube 부드러운 접이식(Fluid Accordion) 폴더 스타일 ---- */
