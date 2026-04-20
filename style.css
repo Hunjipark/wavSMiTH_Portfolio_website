@@ -21,7 +21,7 @@
   --accent-hover: #FFF176;
   --text-primary: #FFFFFF;
   --text-muted:   rgba(255,255,255,0.65);
-  --orbit-line:   rgba(255,255,255,0.30);
+  --orbit-line:   rgba(255,255,255,0.45);
   --orbit-inner-line: rgba(255,255,255,0.18);
   --orbit-glow:   rgba(255,225,53,0.45);
   --panel-bg:     rgba(0, 120, 96, 0.55);
@@ -38,7 +38,7 @@
   --accent-hover: #F3E5AB;
   --text-primary: #F0F0F0;
   --text-muted:   rgba(255,255,255,0.45);
-  --orbit-line:   rgba(255,255,255,0.15);
+  --orbit-line:   rgba(255,255,255,0.35);
   --orbit-inner-line: #D4AF37; /* 노란색 실선 포인트 */
   --orbit-glow:   rgba(212, 175, 55, 0.35);
   --panel-bg:     rgba(18, 20, 24, 0.75);
@@ -55,7 +55,7 @@
   --accent-hover: #1b63b5;       
   --text-primary: #1A1E26;       
   --text-muted:   #535A6B;       
-  --orbit-line:   rgba(22, 82, 150, 0.10); 
+  --orbit-line:   rgba(22, 82, 150, 0.30); 
   --orbit-inner-line: rgba(22, 82, 150, 0.20);
   --orbit-glow:   rgba(22, 82, 150, 0.15);
   --panel-bg:     rgba(215, 224, 235, 0.95); 
@@ -75,7 +75,7 @@
   --accent-hover: #FFE2A6;
   --text-primary: #FFFFFF;
   --text-muted:   rgba(255, 255, 255, 0.70);
-  --orbit-line:   rgba(255, 255, 255, 0.12);
+  --orbit-line:   rgba(255, 255, 255, 0.30);
   --orbit-inner-line: rgba(243, 193, 93, 0.25);
   --orbit-glow:   rgba(142, 68, 173, 0.45);
   --panel-bg:     rgba(8, 2, 18, 0.75);
@@ -142,7 +142,7 @@
   --accent-hover: #FF66B2;       
   --text-primary: #1A1A1A;       /* 진한 블랙 (사이버펑크 로고 느낌) */
   --text-muted:   #666666;       
-  --orbit-line:   rgba(0, 0, 0, 0.08); 
+  --orbit-line:   rgba(0, 0, 0, 0.25); 
   --orbit-inner-line: rgba(0, 229, 255, 0.5); /* 기계 부위의 일렉트릭 블루 포인트 */
   --orbit-glow:   rgba(255, 45, 85, 0.25);
   --panel-bg:     rgba(255, 255, 255, 0.82); /* 맑은 화이트 유리 느낌 */
