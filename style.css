@@ -907,8 +907,8 @@ body {
     display: block;
   }
   .career-year {
-    width: 95px;       /* 연도를 2줄로 만들고 너비를 줄여 설명칸 확보 */
-    font-size: 0.65rem;
+    width: 105px;      /* 95px에서 10px 넓혀 가독성 확보 (여전히 원본 135px보다는 훨씬 좁음) */
+    font-size: 0.71rem; /* 0.65에서 0.71로 키워 원본(0.72)에 가깝게 복구 */
     white-space: normal; /* 줄바꿈 허용 */
     line-height: 1.3;
   }
