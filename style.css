@@ -551,6 +551,7 @@ body {
   margin-bottom: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 10px;
+  position: relative; /* 화살표 버튼의 자유로운 배치를 위한 기준점 설정 */
 }
 
 .yt-folder-title {
@@ -623,15 +624,21 @@ body {
 .folder-content-wrapper {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s, visibility 0.3s;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .yt-folder.open .folder-content-wrapper {
   grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
 }
 
 .folder-content {
-  overflow: hidden; /* 영역 밖 콘텐츠 가리기 필수 */
+  min-height: 0; /* CSS Grid 0fr 트릭에 필수: 내부 콘텐츠가 최소 높이를 0으로 허용 */
+  overflow: hidden;
 }
 
 .yt-item {
@@ -669,6 +676,92 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+
+/* ---- Horizontal Scroll Folder (Shorts 갤러리) ---- */
+.folder-content.horizontal-scroll {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 5px 5px 20px 5px;
+  /* 스크롤바 숨김 처리 */
+  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.folder-content.horizontal-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.yt-item.shorts-item {
+  flex: 0 0 60%; /* 기준 너비의 3/5 */
+  margin-bottom: 0;
+}
+
+.yt-wrapper.shorts-ratio {
+  padding-bottom: 177.77%; /* 9:16 세로비율 */
+}
+
+/* 폴더가 닫힌 상태에서는 화살표 버튼도 숨김 */
+.yt-folder:not(.open) .shorts-nav {
+  display: none;
+}
+
+/* 쇼츠 내비게이션 화살표 버튼 컨테이너 */
+.shorts-nav {
+  position: absolute;
+  right: 0;         /* 오른쪽 끝 라인에 맞춤 */
+  top: 38px;        /* 타이틀 바로 아래, 닫기(x) 아이콘 라인 최적화 */
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+}
+
+.shorts-nav-btn {
+  width: 26px;      /* 원 크기 살짝 더 축소 (28px -> 26px) */
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2); /* 배경을 더 회색빛으로 */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6); /* 더 명확한 연회색 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;  /* 화살표 크기 적정화 */
+  font-weight: 300;
+  transition: all 0.2s ease-out;
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 라이트 테마 전용 은은한 회색 대응 */
+[data-theme="cyber-trunk"] .shorts-nav-btn,
+[data-theme="nomadic-tribe"] .shorts-nav-btn {
+  background: rgba(0, 0, 0, 0.08); /* 조금 더 선명하게 */
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.shorts-nav-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--orbit-glow);
+}
+
+.shorts-nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* 모바일에서는 화살표를 숨기고 직접 스와이프 유도 */
+@media (max-width: 768px) {
+  .shorts-nav {
+    display: none;
+  }
 }
 
 

@@ -23,6 +23,7 @@ window.i18nData = {
     "sfx_item_3": "Horizon Forbidden West",
     "sfx_item_4": "Game Animation_Magician Dagger",
     "sfx_item_5": "Game Animation_GuitarMan",
+    "sfx_item_6": "Game Anim. SFX",
     "panel_bgm_desc": "Background Music — In Game",
     "panel_career_title": "Career",
     "panel_career_desc": "Work history, projects, and collaborations.",
@@ -37,6 +38,7 @@ window.i18nData = {
     "bgm_dnf_2": "Sirocco of the Erosion (Gloomy Memory)",
     
     "bgm_folder_streamer": "<span class='yt-folder-company'>Elif Games</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
+    "bgm_folder_touhou": "<span class='yt-folder-company'>ARTIVE SOUND</span><br/><span class='yt-folder-game'>2025 Touhou Orchestra Concert</span>",
     "bgm_streamer_1": "Broadcast Screen BGM",
 
     // Career Content
@@ -79,6 +81,7 @@ window.i18nData = {
     "sfx_item_3": "Horizon Forbidden West",
     "sfx_item_4": "Game Animation_Magician Dagger",
     "sfx_item_5": "Game Animation_GuitarMan",
+    "sfx_item_6": "Game Anim. SFX",
     "panel_bgm_desc": "인게임 주요 테마 및 BGM 제작",
     "panel_career_title": "Career",
     "panel_career_desc": "참여 게임 프로젝트, 사운드 제작 연혁",
@@ -93,6 +96,7 @@ window.i18nData = {
     "bgm_dnf_2": "침식의 시로코 (암담한 추억)",
 
     "bgm_folder_streamer": "<span class='yt-folder-company'>엘리프 게임즈 (Elif Games)</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
+    "bgm_folder_touhou": "<span class='yt-folder-company'>아티브사운드 (ARTIVE SOUND)</span><br/><span class='yt-folder-game'>2025 동방 오케스트라 콘서트</span>",
     "bgm_streamer_1": "방송화면 BGM",
 
     // Career Content

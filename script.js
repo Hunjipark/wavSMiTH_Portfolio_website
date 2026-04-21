@@ -377,4 +377,25 @@ document.addEventListener('DOMContentLoaded', () => {
     centerTextObj.addEventListener('touchstart', handleGestureStart, { passive: false });
   }
 
+  // ---------------------------------------------------------
+  // 가로 스크롤 쇼츠 내비게이션 (화살표 버튼 클릭 시 한 칸씩 이동)
+  // ---------------------------------------------------------
+  window.scrollShorts = function(btn, direction) {
+    const folder = btn.closest('.yt-folder');
+    const container = folder.querySelector('.horizontal-scroll');
+    if (!container) return;
+
+    const firstItem = container.querySelector('.shorts-item');
+    if (!firstItem) return;
+
+    // CSS의 gap 값을 실제로 읽어와 하드코딩 의존 제거
+    const computedGap = parseFloat(getComputedStyle(container).columnGap) || 15;
+    const itemWidth = firstItem.offsetWidth;
+
+    container.scrollBy({
+      left: direction * (itemWidth + computedGap),
+      behavior: 'smooth'
+    });
+  };
+
 });
