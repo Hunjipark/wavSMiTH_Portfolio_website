@@ -484,6 +484,10 @@ body {
   border-bottom: 1px solid var(--panel-border);
 }
 
+.mobile-only-br {
+  display: none;
+}
+
 .career-year {
   font-family: 'Space Mono', monospace;
   font-size: 0.72rem;
@@ -896,3 +900,20 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* 모바일 세로 모드(Portrait) 특화 Career 레이터 조정 */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .mobile-only-br {
+    display: block;
+  }
+  .career-year {
+    width: 95px;       /* 연도를 2줄로 만들고 너비를 줄여 설명칸 확보 */
+    font-size: 0.65rem;
+    white-space: normal; /* 줄바꿈 허용 */
+    line-height: 1.3;
+  }
+  .career-item {
+    gap: 12px;         /* 간격 최적화 */
+  }
+}
+
