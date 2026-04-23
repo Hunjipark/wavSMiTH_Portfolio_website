@@ -383,7 +383,8 @@ body {
   position: fixed;
   top: 0; right: 0;
   width: var(--panel-width);
-  height: 100vh;
+  height: 100vh;  /* 폴백: dvh 미지원 구형 브라우저 대응 */
+  height: 100dvh; /* 모바일 주소창 변화에 실시간 대응 (하단 잘림 해결) */
   background: var(--panel-bg);
   border-left: 1px solid var(--panel-border);
   backdrop-filter: blur(24px);
@@ -774,7 +775,8 @@ body {
 }
 
 /* 모바일에서는 화살표를 숨기고 직접 스와이프 유도 */
-@media (max-width: 768px) {
+/* (pointer: coarse): 손가락 터치 기기 → 가로 태블릿 포함 대응 */
+@media (max-width: 768px), (pointer: coarse) {
   .shorts-nav {
     display: none;
   }
@@ -840,7 +842,9 @@ body {
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 768px) {
+/* (max-width: 768px): 좁은 화면 (폰, PC 창 축소 테스트)
+   (pointer: coarse): 손가락 터치 기기 (가로 태블릿 포함) → 유리판 + 모바일 레이아웃 적용 */
+@media (max-width: 768px), (pointer: coarse) {
   /* [핵심] 유저가 아래로 스와이프하여 모바일 주소창을 숨길 수 있도록 강제 스크롤 허용 */
   html, body {
     overflow-y: auto; 
