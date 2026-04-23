@@ -720,14 +720,20 @@ body {
   display: none;
 }
 
+/* 쇼츠 폴더 내용 래퍼: CSS Grid 0fr/1fr 애니메이션 호환성 보장 */
+.shorts-inner-wrapper {
+  min-height: 0;
+}
+
 /* 쇼츠 내비게이션 화살표 버튼 컨테이너 */
 .shorts-nav {
   display: flex;
-  justify-content: flex-end; /* 우측 정렬 */
-  padding: 0 5px 10px 0;    /* 상단 여백을 제거하고 하단 여백만 10px 유지 (영상과의 간격) */
+  justify-content: flex-end;
+  padding: 0 5px 10px 0;
   gap: 8px;
   z-index: 20;
 }
+
 
 .shorts-nav-btn {
   width: 26px;      /* 원 크기 살짝 더 축소 (28px -> 26px) */
