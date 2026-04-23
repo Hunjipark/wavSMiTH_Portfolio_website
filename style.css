@@ -842,49 +842,48 @@ body {
 /* ============================================
    RESPONSIVE
    ============================================ */
-
-/* --- [1단계] 유리판(스크롤 허용): 터치 기기 전체 + 좁은 화면 --- */
-/* 역할: 모바일 브라우저 주소창을 스크롤로 숨길 수 있도록 여유 공간을 만듦.       */
-/* 적용: 손가락 터치 기기(가로 태블릿 포함) OR 화면 너비 768px 이하 모두 해당.   */
+/* (max-width: 768px): 좁은 화면 (폰, PC 창 축소 테스트)
+   (pointer: coarse): 손가락 터치 기기 (가로 태블릿 포함) → 유리판 + 모바일 레이아웃 적용 */
 @media (max-width: 768px), (pointer: coarse) {
+  /* [핵심] 유저가 아래로 스와이프하여 모바일 주소창을 숨길 수 있도록 강제 스크롤 허용 */
   html, body {
-    overflow-y: auto;
+    overflow-y: auto; 
     height: auto;
     min-height: 140vh; /* 여유 스크롤 공간 창출 (주소창 밀어내기 용도) */
   }
   body {
-    background-attachment: fixed; /* 스크롤해도 배경 그라데이션이 따라 올라가지 않도록 고정 */
+    background-attachment: fixed; /* 스크롤해도 배경색 그라데이션은 끌려올라가지 않게 단단히 고정 */
   }
   #app {
     height: 140vh; /* 뼈대도 같이 길게 늘림 */
   }
-}
 
-/* --- [2단계] 모바일 레이아웃: 세로 모드 전용 --- */
+<<<<<<< HEAD
+/* --- [2단계] 모바일 레이아웃: 좁은 화면 전용 --- */
 /* 역할: 패널을 아래에서 위로 올라오게 변경, 오빗 축소 등 UI 재배치.              */
-/* 적용: 너비 768px 이하 + 세로 모드(portrait)일 때만 적용.                      */
-/* 가로로 돌리는 순간 조건 해제 → 폰/태블릿 가로 모두 PC 레이아웃(우측 패널).   */
-@media (max-width: 768px) and (orientation: portrait) {
+/* 적용: 화면 너비 768px 이하만 해당. 가로 태블릿(너비 넓음)은 PC 레이아웃 유지. */
+@media (max-width: 768px) {
+=======
+>>>>>>> parent of d96401b (vert hori update 02)
   :root {
     --orbit-size: 240px; /* 오빗 중심축을 확 줄여 글씨 잘림 방지 */
     --panel-width: 100vw;
   }
-
+  
   /* 모바일용 오빗 레이블 글씨 밸런스 축소 */
   .title-main { font-size: 1.6rem; }
-  .title-sub {
-    font-size: 0.68rem;
-    margin-top: 0.3rem;
-    letter-spacing: -0.02em;
-    white-space: nowrap;
+  .title-sub { 
+    font-size: 0.68rem; /* 모바일에서 더 크고 시원하게 */
+    margin-top: 0.3rem; 
+    letter-spacing: -0.02em; /* 커진 폰트에 맞춰 자간 밀착 */
+    white-space: nowrap;     /* 어떤 해상도에서도 3줄 방지 */
     display: block;
   }
-  .title-sub br { display: block; content: ""; margin-top: 2px; }
+  .title-sub br { display: block; content: ""; margin-top: 2px; } /* BR 태그만 줄바꿈 허용 */
   .orbit-label { font-size: 0.75rem; letter-spacing: 0.1em; text-shadow: none; }
   .orbit-sub-label { font-size: 0.55rem; }
-  .orbit-node { width: 12px; height: 12px; }
+  .orbit-node { width: 12px; height: 12px; } /* 버튼 크기도 아주 살짝 축소 */
 
-  /* 패널: 아래에서 위로 슬라이드 (모바일 전용) */
   #content-panel {
     border-radius: var(--radius-panel) var(--radius-panel) 0 0;
     top: auto; bottom: 0; right: 0;
@@ -896,24 +895,24 @@ body {
   }
   #app.panel-open #orbit-section {
     left: 50%;
-    top: 17%;
+    top: 17%; /* 패널이 올라올 때 오빗이 화면 약간 더 위쪽으로 올라감 */
     transform: translate(-50%, -50%) scale(0.68);
   }
 
-  /* 언어전환 버튼: 좌상단으로 이동 */
+  /* 언어전환 버튼 모바일 (화면 빈 공간 중앙 이동) */
   #language-switcher {
-    position: fixed;
+    position: fixed; 
     bottom: auto; right: auto;
-    top: 20px; left: 20px;
-    background: var(--panel-bg);
-    transform: none;
+    top: 20px; left: 20px; 
+    background: var(--panel-bg); /* PC 버전과 색상 통일 (스킨 호환) */
+    transform: none; 
     z-index: 9999;
   }
   #app.panel-open #language-switcher {
-    transform: none;
+    transform: none; 
   }
 
-  /* 인스타그램 갤러리 2열 유지 */
+  /* 모바일(화면 좁을 때)에서는 인스타그램 갤러리를 3칸에서 2칸으로 자동 재배치 */
   .career-grid {
     grid-template-columns: repeat(2, 1fr);
   }
