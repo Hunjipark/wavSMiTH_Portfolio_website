@@ -315,7 +315,7 @@ body {
 
 .orbit-node {
   position: absolute;
-  width: 14px;         /* 완전한 원형 축소 */
+  width: 14px;
   height: 14px;
   border-radius: 50%;
   background: var(--node-bg);
@@ -328,9 +328,30 @@ body {
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
+/* ---- 투명 터치 히트 영역 확장 (시각적 크기 변경 없이 2배) ----
+   JS의 placeNodes()에서 각 노드의 data-angle을 읽어
+   --hit-dx / --hit-dy 로 바깥방향 오프셋을 주입합니다.
+   ::after 원의 중심이 버튼 반지름(7px)만큼 바깥으로 이동하므로
+   실질적인 히트 범위가 안쪽 끝(버튼 내부)에서 바깥쪽 28px까지 확장됩니다. */
+.orbit-node::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;   /* 버튼 시각 크기(14px)의 2배 */
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  /* --hit-dx / --hit-dy: placeNodes()에서 각도별로 주입되는 바깥방향 오프셋 */
+  transform: translate(
+    calc(-50% + var(--hit-dx, 0px)),
+    calc(-50% + var(--hit-dy, 0px))
+  );
+}
+
 .orbit-node:hover {
-  background: rgba(255, 225, 53, 0.35);
-  border-color: rgba(255, 225, 53, 0.85);
+  background: var(--orbit-glow);
+  border-color: var(--accent);
   transform: translate(-50%, -50%) scale(1.4);
 }
 
@@ -359,8 +380,15 @@ body {
   white-space: nowrap;
   text-align: center;
   line-height: 1.4;
-  pointer-events: none;
-  transition: color 0.25s;
+  pointer-events: auto; /* 클릭/터치 활성화 (노드 버튼과 동일한 역할) */
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.25s, opacity 0.2s;
+}
+
+.orbit-label:hover {
+  color: var(--accent);
+  opacity: 0.85;
 }
 
 .orbit-sub-label {
@@ -404,8 +432,9 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain; /* 터치 스크롤 시 배경이 같이 스크롤되는 꿀렁임 현상 완벽 차단 */
-  scrollbar-gutter: stable; /* 스크롤바가 생기거나 말거나 레이아웃 뼈대 고정 */
+  scrollbar-gutter: stable;     /* 스크롤바가 생기거나 말거나 레이아웃 뼈대 고정 */
   padding: 30px 40px 20px;
+  animation: panelFadeIn 0.5s ease forwards;
 }
 
 /* 커스텀 투명-블랙 스크롤바 */
@@ -783,12 +812,7 @@ body {
 }
 
 
-/* ============================================
-   PANEL CONTENT FADE-IN
-   ============================================ */
-.panel-content {
-  animation: panelFadeIn 0.5s ease forwards;
-}
+/* panelFadeIn animation → .panel-content 선언부에 통합됨 (중복 셀렉터 제거) */
 
 /* ===== 외부 떠있는 위젯: 언어 전환 ===== */
 #language-switcher {
@@ -882,7 +906,9 @@ body {
   .title-sub br { display: block; content: ""; margin-top: 2px; } /* BR 태그만 줄바꿈 허용 */
   .orbit-label { font-size: 0.75rem; letter-spacing: 0.1em; text-shadow: none; }
   .orbit-sub-label { font-size: 0.55rem; }
-  .orbit-node { width: 12px; height: 12px; } /* 버튼 크기도 아주 살짝 축소 */
+  /* 모바일: 버튼 시각 크기 축소 + 히트 영역도 비례 조정 (24px = 12px × 2) */
+  .orbit-node { width: 12px; height: 12px; }
+  .orbit-node::after { width: 24px; height: 24px; }
 
   /* 패널: 아래에서 위로 슬라이드 (모바일 전용) */
   #content-panel {

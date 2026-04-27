@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const angleRad = (parseFloat(node.dataset.angle) - 90) * (Math.PI / 180);
       node.style.left = (containerHalf + r * Math.cos(angleRad)) + 'px';
       node.style.top  = (containerHalf + r * Math.sin(angleRad)) + 'px';
+
+      // 터치 히트 영역 방향 주입 (궤도 중심에서 바깥쪽으로 버튼 반지름(7px)만큼 오프셋)
+      // → ::after 원이 바깥방향으로 이동해 시각 크기는 유지하면서 클릭 범위 2배 확장
+      const nodeHalfSize = 7; // 버튼 시각 반지름 (14px / 2)
+      node.style.setProperty('--hit-dx', (Math.cos(angleRad) * nodeHalfSize) + 'px');
+      node.style.setProperty('--hit-dy', (Math.sin(angleRad) * nodeHalfSize) + 'px');
     });
 
     // 레이블 배치 (CSS transform: translate(-50%,-50%) 가 중앙 정렬)
@@ -149,19 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
     initializedWaves.clear();
   }
 
+  // 카테고리 클릭 공통 핸들러 (노드 버튼 + 텍스트 레이블 공유)
+  function handleCategoryClick(e, cat) {
+    e.stopPropagation();
+    if (cat === 'youtube') {
+      window.open('https://www.youtube.com/@wavsmith/featured', '_blank');
+    } else if (cat === 'artive') {
+      window.open('https://www.artivesound.com/', '_blank');
+    } else {
+      openPanel(cat);
+    }
+  }
+
+  // 궤도 노드 버튼 클릭
   document.querySelectorAll('.orbit-node').forEach(node => {
-    node.addEventListener('click', (e) => {
-      e.stopPropagation(); // 노드 클릭 시 이벤트 전파 방지
-      
-      const cat = node.dataset.category;
-      if (cat === 'youtube') {
-        window.open('https://www.youtube.com/@wavsmith/featured', '_blank');
-      } else if (cat === 'artive') {
-        window.open('https://www.artivesound.com/', '_blank');
-      } else {
-        openPanel(cat);
-      }
-    });
+    node.addEventListener('click', (e) => handleCategoryClick(e, node.dataset.category));
+  });
+
+  // 텍스트 레이블 클릭 (노드 버튼과 동일한 동작)
+  document.querySelectorAll('.orbit-label').forEach(label => {
+    label.addEventListener('click', (e) => handleCategoryClick(e, label.dataset.category));
   });
 
   // ======== 다국어(i18n) 통합 엔진 ========
@@ -301,10 +314,10 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.from('#orbit-container', {
     scale: 0.85, opacity: 0, duration: 1.2, ease: 'elastic.out(1, 0.6)',
   });
-  // 노드/레이블에 GSAP 적용 안 함 — transform 충돌 법판
+  // 노드/레이블에 GSAP 적용 안 함 — transform 충돌 방지
 
   // =============================================
-  // 6. 고도화된 테마 스위칭 시스템 (시작점 제한 + 전역 거리 추적)
+  // 5. 고도화된 테마 스위칭 시스템 (시작점 제한 + 전역 거리 추적)
   // =============================================
   const themes = ['mint-yellow', 'dark-gold', 'nomadic-tribe', 'purple-cloud', 'cyber-trunk'];
   let currentThemeIndex = themes.indexOf(document.documentElement.getAttribute('data-theme'));
