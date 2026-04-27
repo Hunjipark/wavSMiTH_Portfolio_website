@@ -155,26 +155,19 @@ document.addEventListener('DOMContentLoaded', () => {
     initializedWaves.clear();
   }
 
-  // 카테고리 클릭 공통 핸들러 (노드 버튼 + 텍스트 레이블 공유)
-  function handleCategoryClick(e, cat) {
-    e.stopPropagation();
-    if (cat === 'youtube') {
-      window.open('https://www.youtube.com/@wavsmith/featured', '_blank');
-    } else if (cat === 'artive') {
-      window.open('https://www.artivesound.com/', '_blank');
-    } else {
-      openPanel(cat);
-    }
-  }
-
-  // 궤도 노드 버튼 클릭
   document.querySelectorAll('.orbit-node').forEach(node => {
-    node.addEventListener('click', (e) => handleCategoryClick(e, node.dataset.category));
-  });
-
-  // 텍스트 레이블 클릭 (노드 버튼과 동일한 동작)
-  document.querySelectorAll('.orbit-label').forEach(label => {
-    label.addEventListener('click', (e) => handleCategoryClick(e, label.dataset.category));
+    node.addEventListener('click', (e) => {
+      e.stopPropagation(); // 노드 클릭 시 이벤트 전파 방지
+      
+      const cat = node.dataset.category;
+      if (cat === 'youtube') {
+        window.open('https://www.youtube.com/@wavsmith/featured', '_blank');
+      } else if (cat === 'artive') {
+        window.open('https://www.artivesound.com/', '_blank');
+      } else {
+        openPanel(cat);
+      }
+    });
   });
 
   // ======== 다국어(i18n) 통합 엔진 ========

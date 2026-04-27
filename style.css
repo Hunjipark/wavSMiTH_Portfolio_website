@@ -365,9 +365,7 @@ body {
 #orbit-labels {
   position: absolute;
   inset: 0;
-  /* pointer-events: none 제거 — iOS Safari에서 none인 부모가 자식 div의 touch hit-test를
-     완전히 차단하는 동작 때문에 모바일에서 레이블 터치가 무시됐음.
-     빈 영역 클릭은 document click 리스너(패널 닫기)가 그대로 처리하므로 기능 충돌 없음. */
+  pointer-events: none;
 }
 
 .orbit-label {
@@ -382,16 +380,8 @@ body {
   white-space: nowrap;
   text-align: center;
   line-height: 1.4;
-  pointer-events: auto;
-  cursor: pointer;
-  user-select: none;
-  touch-action: manipulation; /* 모바일 300ms 탭 딜레이 제거 */
-  transition: color 0.25s, opacity 0.2s;
-}
-
-.orbit-label:hover {
-  color: var(--accent);
-  opacity: 0.85;
+  pointer-events: none;
+  transition: color 0.25s;
 }
 
 .orbit-sub-label {

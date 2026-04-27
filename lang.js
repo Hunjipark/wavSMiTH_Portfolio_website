@@ -3,14 +3,14 @@ window.i18nData = {
     // Main UI
     "title_main": "wavSMiTH",
     "title_sub": "Game Music Composer<br />&amp; Sound Designer",
-    "orbit_sfx": "Sound FX",
+    "orbit_sfx": "SFX",
     "orbit_bgm": "BGM",
     "orbit_artive": "ARTIVE SOUND<br/><span class='orbit-sub-label'>(Contact)</span>",
     "orbit_career": "Career",
     "orbit_youtube": "YOUTUBE",
 
     // Panel Titles & Descs
-    "panel_sfx_title": "Sound FX",
+    "panel_sfx_title": "SFX",
     "panel_sfx_desc": "Sound Effects — Game UI, Environments, Character Foley",
     "panel_bgm_title": "BGM",
 
@@ -61,14 +61,14 @@ window.i18nData = {
     // Main UI
     "title_main": "wavSMiTH",
     "title_sub": "Game Music Composer<br />&amp; Sound Designer",
-    "orbit_sfx": "Sound FX",
+    "orbit_sfx": "SFX",
     "orbit_bgm": "BGM",
     "orbit_artive": "ARTIVE SOUND<br/><span class='orbit-sub-label'>(Contact)</span>",
     "orbit_career": "CAREER",
     "orbit_youtube": "YOUTUBE",
 
     // Panel Titles & Descs
-    "panel_sfx_title": "Sound FX",
+    "panel_sfx_title": "SFX",
     "panel_sfx_desc": "게임 UI, 배경음, 타격음 등 사운드 이펙트 제작",
     "panel_bgm_title": "BGM",
 
