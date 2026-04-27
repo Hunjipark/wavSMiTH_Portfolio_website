@@ -3,7 +3,7 @@ window.i18nData = {
     // Main UI
     "title_main": "wavSMiTH",
     "title_sub": "Game Music Composer<br />&amp; Sound Designer",
-    "orbit_sfx": "SFX",
+    "orbit_sfx": "Sound FX",
     "orbit_bgm": "BGM",
     "orbit_artive": "ARTIVE SOUND<br/><span class='orbit-sub-label'>(Contact)</span>",
     "orbit_career": "Career",
@@ -61,7 +61,7 @@ window.i18nData = {
     // Main UI
     "title_main": "wavSMiTH",
     "title_sub": "Game Music Composer<br />&amp; Sound Designer",
-    "orbit_sfx": "SFX",
+    "orbit_sfx": "Sound FX",
     "orbit_bgm": "BGM",
     "orbit_artive": "ARTIVE SOUND<br/><span class='orbit-sub-label'>(Contact)</span>",
     "orbit_career": "CAREER",
