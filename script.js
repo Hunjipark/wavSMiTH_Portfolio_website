@@ -2,11 +2,17 @@
    wavSMiTH Portfolio — script.js
    - 오빗 노드 + 외부 레이블 각도 배치
    - GSAP 트랜지션 (오빗 좌측 스윙 + 패널 슬라이드)
-   - Wavesurfer.js 파형 / 슬라이드바 플레이어
-   - 전체 볼륨 마스터 페이더
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const EXTERNAL_LINKS = {
+    youtube: 'https://www.youtube.com/@wavsmith/featured',
+    artive: 'https://www.artivesound.com/'
+  };
+
+  function openExternal(url) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
 
   // =============================================
   // 0. 초기화: 중앙 텍스트 정렬 (CSS 충돌 방지 및 쏠림 해결)
@@ -32,18 +38,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // 전체 리스트에서 무작위 5개만 추출 (videos.js에서 데이터 공급)
     const selectedVideos = shuffled.slice(0, 5);
     
-    let html = '';
     selectedVideos.forEach(video => {
-      html += `
-        <div class="yt-item">
-          <h4 class="yt-song-title">${video.title}</h4>
-          <div class="yt-wrapper">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
-      `;
+      const item = document.createElement('div');
+      item.className = 'yt-item';
+
+      const title = document.createElement('h4');
+      title.className = 'yt-song-title';
+      title.textContent = video.title;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'yt-wrapper';
+
+      const iframe = document.createElement('iframe');
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.src = `https://www.youtube.com/embed/${video.id}`;
+      iframe.title = video.title;
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+
+      wrapper.appendChild(iframe);
+      item.append(title, wrapper);
+      ambienceContent.appendChild(item);
     });
-    ambienceContent.innerHTML = html;
   }
 
   // =============================================
@@ -115,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.orbit-node').forEach(n =>
       n.classList.toggle('active', n.dataset.category === category)
     );
+    document.querySelectorAll('.orbit-node[aria-pressed]').forEach(n =>
+      n.setAttribute('aria-pressed', String(n.dataset.category === category))
+    );
     document.querySelectorAll('.orbit-label').forEach(l =>
       l.classList.toggle('active', l.dataset.category === category)
     );
@@ -138,8 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     }
 
-    // Wavesurfer 초기화 (패널 열린 뒤 약간 딜레이)
-    setTimeout(() => initWaveforms(category), 450);
   }
 
   function closePanel() {
@@ -147,12 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
     app.classList.remove('panel-open');
     panel.setAttribute('aria-hidden', 'true');
     document.querySelectorAll('.orbit-node').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.orbit-node[aria-pressed]').forEach(n => n.setAttribute('aria-pressed', 'false'));
     document.querySelectorAll('.orbit-label').forEach(l => l.classList.remove('active'));
 
-    // Wavesurfer 인스턴스 정리
-    waveInstances.forEach(ws => { try { ws.destroy(); } catch(e) {} });
-    waveInstances = [];
-    initializedWaves.clear();
   }
 
   document.querySelectorAll('.orbit-node').forEach(node => {
@@ -161,9 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const cat = node.dataset.category;
       if (cat === 'youtube') {
-        window.open('https://www.youtube.com/@wavsmith/featured', '_blank');
+        openExternal(EXTERNAL_LINKS.youtube);
       } else if (cat === 'artive') {
-        window.open('https://www.artivesound.com/', '_blank');
+        openExternal(EXTERNAL_LINKS.artive);
       } else {
         openPanel(cat);
       }
@@ -189,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 브라우저에 현재 표출 중인 언어 인식 교체
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'kr' ? 'ko' : 'en';
   }
 
   // 언어 변경 버튼 기능 및 트리거
@@ -197,7 +213,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
       
       // 누른 버튼의 언어(en, kr)로 일괄 변경!
       const newLang = btn.dataset.lang || 'en';
@@ -239,67 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-
-  // =============================================
-  // 3. Wavesurfer.js 슬라이드바 파형 플레이어
-  // =============================================
-  let waveInstances  = [];
-  const initializedWaves = new Set();
-
-  function initWaveforms(category) {
-    const panelEl = document.getElementById('panel-' + category);
-    if (!panelEl) return;
-
-    const waveEls = panelEl.querySelectorAll('.waveform');
-
-    waveEls.forEach((el) => {
-      if (initializedWaves.has(el.id)) return;
-      initializedWaves.add(el.id);
-
-      const playBtn = el.closest('.waveform-wrap')?.querySelector('.play-btn');
-      const src = playBtn?.dataset.src || '';
-
-      try {
-        const ws = WaveSurfer.create({
-          container: el,
-          waveColor:     'rgba(255,255,255,0.28)',
-          progressColor: '#FFE135',
-          cursorColor:   'rgba(255,225,53,0.7)',
-          cursorWidth:   2,
-          barWidth:      2,
-          barRadius:     2,
-          barGap:        2,
-          height:        44,
-          normalize:     true,
-          interact:      true,   // 클릭해서 seek 가능
-        });
-
-        ws.setVolume(0.8);
-
-        if (src) {
-          ws.load(src);
-        }
-
-        // 재생 상태에 따라 버튼 아이콘 토글
-        if (playBtn) {
-          ws.on('play',  () => { playBtn.innerHTML = '&#9646;&#9646;'; });
-          ws.on('pause', () => { playBtn.innerHTML = '&#9654;'; });
-          ws.on('finish',() => { playBtn.innerHTML = '&#9654;'; });
-
-          playBtn.addEventListener('click', () => {
-            // 다른 트랙 일시정지
-            waveInstances.forEach(w => { if (w !== ws) { try { w.pause(); } catch(e) {} } });
-            ws.playPause();
-          });
-        }
-
-        waveInstances.push(ws);
-
-      } catch(e) {
-        console.warn('Wavesurfer init error:', e);
-      }
-    });
-  }
 
   // =============================================
   // 4. 구도 GSAP 초기 등장 애니메이션

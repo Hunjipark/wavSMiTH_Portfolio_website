@@ -34,9 +34,9 @@
     <!-- ===== ORBIT SECTION (left-side on panel open) ===== -->
     <!-- ===== 외부 떠있는 위젯: 언어 전환 (Right Bottom) ===== -->
     <div id="language-switcher">
-      <button class="lang-btn active" data-lang="kr">KR</button>
+      <button type="button" class="lang-btn active" data-lang="kr" aria-label="한국어로 보기" aria-pressed="true">KR</button>
       <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="en" aria-label="View in English" aria-pressed="false">EN</button>
     </div>
 
     <section id="orbit-section">
@@ -55,11 +55,11 @@
 
         <!-- 카테고리 버튼 (orbit 위의 작은 원형 마커) -->
         <div id="orbit-nodes">
-          <button class="orbit-node" data-category="sfx" data-angle="-45"></button>
-          <button class="orbit-node" data-category="bgm" data-angle="27"></button>
-          <button class="orbit-node" data-category="career" data-angle="99"></button>
-          <button class="orbit-node" data-category="artive" data-angle="171"></button>
-          <button class="orbit-node" data-category="youtube" data-angle="243"></button>
+          <button type="button" class="orbit-node" data-category="sfx" data-angle="-45" aria-label="Sound FX" aria-pressed="false"></button>
+          <button type="button" class="orbit-node" data-category="bgm" data-angle="27" aria-label="BGM" aria-pressed="false"></button>
+          <button type="button" class="orbit-node" data-category="career" data-angle="99" aria-label="Career" aria-pressed="false"></button>
+          <button type="button" class="orbit-node" data-category="artive" data-angle="171" aria-label="ARTIVE SOUND contact"></button>
+          <button type="button" class="orbit-node" data-category="youtube" data-angle="243" aria-label="wavSMiTH YouTube channel"></button>
         </div>
 
         <!-- 카테고리 텍스트 레이블 (orbit 바깥쪽) -->
@@ -83,7 +83,7 @@
 
     <!-- ===== CONTENT PANEL (우측 슬라이드 인) ===== -->
     <aside id="content-panel" aria-hidden="true">
-      <button id="panel-close" aria-label="Close panel">&#x2715;</button>
+      <button type="button" id="panel-close" aria-label="Close panel">&#x2715;</button>
 
       <!-- SFX 패널 -->
       <div class="panel-content" id="panel-sfx" hidden>
@@ -98,28 +98,35 @@
                 <div class="yt-item">
                   <h4 class="yt-song-title">Halchemist (SFX)</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/RLz5ijzgbbY" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/RLz5ijzgbbY" frameborder="0"
+                      allowfullscreen></iframe>
+                  </div>
+                </div>
+                <div class="yt-item">
+                  <h4 class="yt-song-title">Forge of the Fae (SFX)</h4>
+                  <div class="yt-wrapper">
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/lAexzt7wDuA" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_4">Game Animation_Magician Dagger</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/8BGq9GUZcsc" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/8BGq9GUZcsc" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_5">Game Animation_GuitarMan</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WFXobUPjBAA" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/WFXobUPjBAA" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_6">Game Anim. SFX</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z2RsDNPt6jE" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/z2RsDNPt6jE" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
@@ -135,21 +142,21 @@
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_1">Granblue Fantasy: Relink</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/2JJzZG6-dn4" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/2JJzZG6-dn4" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_2">Dragon's Dogma 2</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/cqNpIJlF8JY" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/cqNpIJlF8JY" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item">
                   <h4 class="yt-song-title" data-i18n="sfx_item_3">Horizon Forbidden West</h4>
                   <div class="yt-wrapper">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZjrZGg8YRBo" frameborder="0"
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/ZjrZGg8YRBo" frameborder="0"
                       allowfullscreen></iframe>
                   </div>
                 </div>
@@ -182,7 +189,7 @@
               <div class="yt-item">
                 <h4 class="yt-song-title" data-i18n="bgm_dnf_2">Sirocco of the Erosion (Gloomy Memory)</h4>
                 <div class="yt-wrapper">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-fYPCd5l6mA" frameborder="0"
+                  <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/-fYPCd5l6mA" frameborder="0"
                     allowfullscreen></iframe>
                 </div>
               </div>
@@ -190,7 +197,7 @@
               <div class="yt-item">
                 <h4 class="yt-song-title" data-i18n="bgm_dnf_1">Sirocco of the Erosion (Ash Gray Yearning)</h4>
                 <div class="yt-wrapper">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/DvpoOzkxdAA" frameborder="0"
+                  <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/DvpoOzkxdAA" frameborder="0"
                     allowfullscreen></iframe>
                 </div>
               </div>
@@ -206,7 +213,7 @@
               <div class="yt-item">
                 <h4 class="yt-song-title" data-i18n="bgm_nikke_1">ABSOLUTE : Tactical</h4>
                 <div class="yt-wrapper">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WurNwvgtbpU" frameborder="0"
+                  <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/WurNwvgtbpU" frameborder="0"
                     allowfullscreen></iframe>
                 </div>
               </div>
@@ -214,7 +221,7 @@
               <div class="yt-item">
                 <h4 class="yt-song-title" data-i18n="bgm_nikke_2">COINS IN RUSH : Smooth Operation</h4>
                 <div class="yt-wrapper">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FvnF8hZ60O4" frameborder="0"
+                  <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/FvnF8hZ60O4" frameborder="0"
                     allowfullscreen></iframe>
                 </div>
               </div>
@@ -234,23 +241,23 @@
             <div class="shorts-inner-wrapper">
               <!-- 가로 스크롤 내비게이션 버튼 -->
               <div class="shorts-nav" onclick="event.stopPropagation()">
-                <button class="shorts-nav-btn" onclick="scrollShorts(this, -1)" title="Previous">‹</button>
-                <button class="shorts-nav-btn" onclick="scrollShorts(this, 1)" title="Next">›</button>
+                <button type="button" class="shorts-nav-btn" onclick="scrollShorts(this, -1)" title="Previous">‹</button>
+                <button type="button" class="shorts-nav-btn" onclick="scrollShorts(this, 1)" title="Next">›</button>
               </div>
               <div class="folder-content horizontal-scroll">
                 <div class="yt-item shorts-item">
                   <div class="yt-wrapper shorts-ratio">
-                    <iframe src="https://www.youtube.com/embed/KoM9Mh8qzmI" frameborder="0" allowfullscreen></iframe>
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" src="https://www.youtube.com/embed/KoM9Mh8qzmI" frameborder="0" allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item shorts-item">
                   <div class="yt-wrapper shorts-ratio">
-                    <iframe src="https://www.youtube.com/embed/8GPG0V5_WP4" frameborder="0" allowfullscreen></iframe>
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" src="https://www.youtube.com/embed/8GPG0V5_WP4" frameborder="0" allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="yt-item shorts-item">
                   <div class="yt-wrapper shorts-ratio">
-                    <iframe src="https://www.youtube.com/embed/acFYNj0MIK0" frameborder="0" allowfullscreen></iframe>
+                    <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" src="https://www.youtube.com/embed/acFYNj0MIK0" frameborder="0" allowfullscreen></iframe>
                   </div>
                 </div>
               </div>
@@ -266,7 +273,7 @@
               <div class="yt-item">
                 <h4 class="yt-song-title" data-i18n="bgm_streamer_1">Broadcast Screen BGM</h4>
                 <div class="yt-wrapper">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_K33WVLoZlM" frameborder="0"
+                  <iframe referrerpolicy="strict-origin-when-cross-origin" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/_K33WVLoZlM" frameborder="0"
                     allowfullscreen></iframe>
                 </div>
               </div>
@@ -449,7 +456,6 @@
 
   <!-- ===== 로컬 라이브러리 연결 ===== -->
   <script src="External Library/gsap.min.js"></script>
-  <script src="External Library/wavesurfer.min.js"></script>
   <script src="videos.js"></script>
   <script src="lang.js"></script>
   <script src="script.js"></script>
