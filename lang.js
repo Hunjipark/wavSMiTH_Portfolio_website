@@ -32,11 +32,11 @@ window.i18nData = {
     "bgm_folder_nikke": "<span class='yt-folder-company'>Shift Up</span><br/><span class='yt-folder-game'>Goddess of Victory: Nikke</span>",
     "bgm_nikke_1": "ABSOLUTE : Tactical",
     "bgm_nikke_2": "COINS IN RUSH : Smooth Operation",
-    
+
     "bgm_folder_dnf": "<span class='yt-folder-company'>Neople</span><br/><span class='yt-folder-game'>Dungeon & Fighter Mobile</span>",
     "bgm_dnf_1": "Sirocco of the Erosion (Gray Nostalgia)",
     "bgm_dnf_2": "Sirocco of the Erosion (Gloomy Memory)",
-    
+
     "bgm_folder_streamer": "<span class='yt-folder-company'>Elif Games</span><br/><span class='yt-folder-game'>나의 별난 스트리머!</span>",
     "bgm_folder_touhou": "<span class='yt-folder-company'>ARTIVE SOUND</span><br/><span class='yt-folder-game'>2025 Touhou Orchestra Concert</span>",
     "bgm_streamer_1": "Broadcast Screen BGM",
@@ -47,7 +47,7 @@ window.i18nData = {
     "career_1_date": "2025.07 <br class='mobile-only-br'> – Present",
     "career_1_title": "ARTIVE SOUND",
     "career_1_desc": "Produced BGM & SFX for major game titles, including projects with Shift Up, Neople, Krafton, and Kabam.",
-    "career_2_date": "2023.01 <br class='mobile-only-br'> – 2025.06",
+    "career_2_date": "2024.01 <br class='mobile-only-br'> – 2025.06",
     "career_2_title": "Freelance Game Sound Designer",
     "career_2_desc": "BGM & SFX Production for Games (Kangwon Land slot games, 10+ indie games, etc.) / Produced music for Melon Music Awards 2023 IVE.",
     "career_3_date": "2021.01 <br class='mobile-only-br'> – 2022.07",
@@ -90,7 +90,7 @@ window.i18nData = {
     "bgm_folder_nikke": "<span class='yt-folder-company'>Shift Up</span><br/><span class='yt-folder-game'>승리의 여신: 니케</span>",
     "bgm_nikke_1": "ABSOLUTE : Tactical",
     "bgm_nikke_2": "COINS IN RUSH : Smooth Operation",
-    
+
     "bgm_folder_dnf": "<span class='yt-folder-company'>Neople</span><br/><span class='yt-folder-game'>던전앤파이터 모바일</span>",
     "bgm_dnf_1": "침식의 시로코 (잿빛 그리움)",
     "bgm_dnf_2": "침식의 시로코 (암담한 추억)",
@@ -105,7 +105,7 @@ window.i18nData = {
     "career_1_date": "2025.07 <br class='mobile-only-br'> – 현재",
     "career_1_title": "아티브사운드 (ARTIVE SOUND)",
     "career_1_desc": "시프트업, 네오플, 크래프톤, 카밤 등 메이저 게임 개발사의 프로젝트 BGM & SFX 제작으로 참여.",
-    "career_2_date": "2023.01 <br class='mobile-only-br'> – 2025.06",
+    "career_2_date": "2024.01 <br class='mobile-only-br'> – 2025.06",
     "career_2_title": "프리랜서 게임 사운드 디자이너",
     "career_2_desc": "게임 BGM & SFX 제작 (강원랜드 슬롯게임, 인디게임 10개 등) / Melon Music Award 2023 아이브(IVE) 음원 제작",
     "career_3_date": "2021.01 <br class='mobile-only-br'> – 2022.07",
