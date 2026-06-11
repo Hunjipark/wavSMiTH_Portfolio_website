@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // xPercent/yPercent: CSS top:50%/left:50% 기준에서의 미세 보정값.
     // Space Mono 폰트 + 현재 텍스트 내용 기준으로 시각적 정중앙에 맞춰 조율된 수치입니다.
     // 폰트나 텍스트 내용 변경 시 재조율이 필요합니다.
-    gsap.set(centerTextObj, { xPercent: -48.5, yPercent: -54, x: 0, y: 0 });
+    gsap.set(centerTextObj, { xPercent: -48.5, yPercent: -50, x: 0, y: 0 });
   }
 
   // 0-1. Ambience Design 무작위 유튜브 로딩 (videos.js 데이터 참조)

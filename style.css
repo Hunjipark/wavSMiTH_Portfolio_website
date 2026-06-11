@@ -21,8 +21,8 @@
   --accent-hover: #FFF176;
   --text-primary: #FFFFFF;
   --text-muted:   rgba(255,255,255,0.65);
-  --orbit-line:   rgba(255,255,255,0.45);
-  --orbit-inner-line: rgba(255,255,255,0.18);
+  --orbit-line:   rgba(255, 225, 53, 0.70);
+  --orbit-inner-line: rgba(255, 225, 53, 0.40);
   --orbit-glow:   rgba(255,225,53,0.45);
   --panel-bg:     rgba(0, 120, 96, 0.55);
   --panel-border: rgba(255,255,255,0.22);
