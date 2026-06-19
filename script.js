@@ -1,7 +1,8 @@
 /* ============================================
    wavSMiTH Portfolio — script.js
-   - 오빗 노드 + 외부 레이블 각도 배치
-   - GSAP 트랜지션 (오빗 좌측 스윙 + 패널 슬라이드)
+   역할: 오빗 UI, 패널 열기/닫기, 언어 전환, 테마 스위칭
+   포트폴리오 콘텐츠 렌더링 → data_loader.js
+   UI 다국어 텍스트             → lang.js
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,45 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Space Mono 폰트 + 현재 텍스트 내용 기준으로 시각적 정중앙에 맞춰 조율된 수치입니다.
     // 폰트나 텍스트 내용 변경 시 재조율이 필요합니다.
     gsap.set(centerTextObj, { xPercent: -48.5, yPercent: -50, x: 0, y: 0 });
-  }
-
-  // 0-1. Ambience Design 무작위 유튜브 로딩 (videos.js 데이터 참조)
-  // =============================================
-  const ambienceContent = document.getElementById('ambience-content');
-  if (ambienceContent && typeof ambienceVideos !== 'undefined') {
-    const shuffled = [...ambienceVideos];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    
-    // 전체 리스트에서 무작위 5개만 추출 (videos.js에서 데이터 공급)
-    const selectedVideos = shuffled.slice(0, 5);
-    
-    selectedVideos.forEach(video => {
-      const item = document.createElement('div');
-      item.className = 'yt-item';
-
-      const title = document.createElement('h4');
-      title.className = 'yt-song-title';
-      title.textContent = video.title;
-
-      const wrapper = document.createElement('div');
-      wrapper.className = 'yt-wrapper';
-
-      const iframe = document.createElement('iframe');
-      iframe.width = '100%';
-      iframe.height = '100%';
-      iframe.src = `https://www.youtube.com/embed/${video.id}`;
-      iframe.title = video.title;
-      iframe.loading = 'lazy';
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      iframe.allowFullscreen = true;
-
-      wrapper.appendChild(iframe);
-      item.append(title, wrapper);
-      ambienceContent.appendChild(item);
-    });
   }
 
   // =============================================
@@ -186,25 +148,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ======== 다국어(i18n) 통합 엔진 ========
+  // =============================================
+  // 다국어(i18n) — 정적 UI 텍스트 교체 (lang.js 데이터 사용)
+  // 포트폴리오 콘텐츠는 data_loader.js의 renderAll()이 담당
+  // =============================================
   function setLanguage(lang) {
-    // lang.js에서 데이터를 불러옴
     if (!window.i18nData || !window.i18nData[lang]) return;
     const data = window.i18nData[lang];
-    
-    // 일반 텍스트 데이터 교체
+
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (data[key]) el.textContent = data[key];
+      if (data[key] !== undefined) el.textContent = data[key];
     });
-
-    // 줄바꿈(<br>) 등 HTML 태그 포함 텍스트 교체
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
       const key = el.getAttribute('data-i18n-html');
-      if (data[key]) el.innerHTML = data[key];
+      if (data[key] !== undefined) el.innerHTML = data[key];
     });
 
-    // 브라우저에 현재 표출 중인 언어 인식 교체
     document.documentElement.lang = lang === 'kr' ? 'ko' : 'en';
   }
 
@@ -220,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // 누른 버튼의 언어(en, kr)로 일괄 변경!
       const newLang = btn.dataset.lang || 'en';
       setLanguage(newLang);
+      // CSV 데이터도 해당 언어로 재렌더링
+      if (window.portfolioLoader) window.portfolioLoader.renderAll(newLang);
     });
   });
 
@@ -227,13 +189,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const initialLang = document.querySelector('.lang-btn.active')?.dataset.lang || 'en';
   setLanguage(initialLang);
   
-  // ======== 0. 폴더 아코디언 접기/펴기 이벤트 연결 ========
-  document.querySelectorAll('.yt-folder-title').forEach(title => {
-    title.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const folder = title.closest('.yt-folder');
-      if (folder) folder.classList.toggle('open');
-    });
+  // =============================================
+  // 폴더 아코디언 — 이벤트 위임 방식
+  // data_loader.js가 동적 생성하는 폴더도 포함해서 처리됩니다.
+  // (단, data_loader.js 자체도 폴더 생성 시 이벤트를 직접 부착하므로 중복 방지 필요 없음)
+  // =============================================
+  document.getElementById('content-panel').addEventListener('click', (e) => {
+    const title = e.target.closest('.yt-folder-title');
+    if (!title) return;
+    e.stopPropagation();
+    const folder = title.closest('.yt-folder');
+    if (folder) folder.classList.toggle('open');
   });
   
   // 1. X 버튼 누르면 닫기
