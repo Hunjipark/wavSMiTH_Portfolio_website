@@ -1,4 +1,4 @@
-section,item_type,group,company,project,period,title,description,image_url,order,visible,note
+section,item_type,group,company,project,period,title,description,image_url,card_style,order,visible,note
 career,timeline,Timeline / History,,,2025.07 - Present,ARTIVE SOUND,"BGM & SFX production for major game developers (Shift Up, Neople, KRAFTON, Kabam, etc.).",,1,TRUE,
 career,timeline,Timeline / History,,,2024.01 - 2025.06,Freelance Game Sound Designer,"BGM & SFX Production for Games (Kangwon Land slot games, 10+ indie games, etc.) / Produced music for Melon Music Awards 2023 IVE.",,2,TRUE,
 career,timeline,Timeline / History,,,2021.01 - 2022.07,The Rewind Film,"Video Sound Engineer (Sound for global brands: Samsung, E-mart, IKEA, Taylor Made, etc.)",,3,TRUE,
@@ -13,7 +13,7 @@ career,project,Game Projects,Krafton,Waltz and Jam,,Waltz and Jam,,https://share
 career,project,Game Projects,,Halchemist,,Halchemist,,https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2571730/header.jpg,8,TRUE,
 career,project,Game Projects,,Deadly Trick,,Deadly Trick,,https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3088400/header.jpg,9,TRUE,
 career,project,Game Projects,,Kona & SnowRabbit,,Kona & SnowRabbit,,https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2726560/header.jpg,10,TRUE,
-career,project,Game Projects,Elif Games,My Unusual Streamer,,My Unusual Streamer,,img/my_unusual_streamer.png,11,TRUE,
+career,project,Game Projects,Elif Games,My Unusual Streamer,,My Unusual Streamer,,img/my_unusual_streamer.png,contain-white,11,TRUE,
 career,project,Game Projects,,Contract X Romance,,Contract X Romance,,https://d2x8kymwjom7h7.cloudfront.net/live/member_no/161075625/application_no/119001/images/Normal169_1753336382704.png,12,TRUE,
 career,project,Game Projects,,HELLAXY,,HELLAXY,,https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2918630/header.jpg,13,TRUE,
 career,project,Game Projects,,Maid Survivors: Little Angels,,Maid Survivors: Little Angels,,https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2771600/header.jpg,14,TRUE,

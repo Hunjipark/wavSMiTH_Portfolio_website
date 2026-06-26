@@ -562,9 +562,14 @@ body {
   transition: transform 0.25s ease-out, box-shadow 0.25s;
 }
 
-/* 투명 배경 PNG 이미지용 (예: 나의 별난 스트리머) */
+/* 투명 배경 PNG — 흰 배경 + 줌아웃 (예: 나의 별난 스트리머) */
 .career-grid-item--light {
   background: #ffffff;
+}
+
+/* 투명 배경 PNG — 검은 배경 + 줌아웃 */
+.career-grid-item--dark {
+  background: #111111;
 }
 
 .career-grid-item:hover {
