@@ -1,0 +1,18 @@
+# Cloudflare Pages — HTTP 캐시 제어
+# HTML / JS / CSS / CSV: 항상 서버에서 최신 버전 확인
+# 이미지: 30일 캐시 (변경 빈도 낮음)
+
+/index.html
+  Cache-Control: no-cache, must-revalidate
+
+/*.js
+  Cache-Control: no-cache, must-revalidate
+
+/*.css
+  Cache-Control: no-cache, must-revalidate
+
+/Portfolio_csv/*
+  Cache-Control: no-cache, must-revalidate
+
+/img/*
+  Cache-Control: no-cache, must-revalidate
