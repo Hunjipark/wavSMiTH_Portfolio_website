@@ -546,36 +546,35 @@ body {
 /* ---- Career Game Grid (인스타그램 갤러리) ---- */
 .career-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* PC에서도 모바일처럼 시원한 2열 세팅 */
+  grid-template-columns: repeat(2, 1fr); /* 2열 유지 */
   gap: 12px;
   padding-top: 5px;
+  align-items: start; /* 행 높이를 강제로 맞추지 않음 → 각 이미지가 자기 비율대로 */
 }
 
 .career-grid-item {
-  position: relative;
-  width: 100%;
-  min-height: 80px;          /* 최소 높이만 보장, 비율은 이미지가 결정 */
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  background: rgba(0,0,0,0.35); /* contain 모드 빈 공간 배경 */
+  background: rgba(20, 20, 20, 0.6); /* 로딩 중/여백 배경 */
   border: 1px solid var(--panel-border);
   transition: transform 0.25s ease-out, box-shadow 0.25s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+/* 투명 배경 PNG 이미지용 (예: 나의 별난 스트리머) */
+.career-grid-item--light {
+  background: #ffffff;
 }
 
 .career-grid-item:hover {
-  transform: translateY(-4px) scale(1.02); /* 호버 시 살짝 떠오르는 고급스러운 액션 */
+  transform: translateY(-4px) scale(1.02);
   box-shadow: 0 8px 16px var(--orbit-glow);
   z-index: 2;
 }
 
 .career-grid-item img {
   width: 100%;
-  height: auto;              /* 이미지 원본 비율 유지 */
-  object-fit: contain;       /* 잘리지 않고 전체가 보임 */
+  height: auto;   /* 원본 비율 그대로 */
   display: block;
 }
 

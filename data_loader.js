@@ -296,6 +296,10 @@
 
         const card = document.createElement('div');
         card.className = 'career-grid-item';
+        // PNG 이미지는 투명 배경일 수 있으므로 흰 배경 클래스 추가
+        if (row.image_url && row.image_url.toLowerCase().endsWith('.png')) {
+          card.classList.add('career-grid-item--light');
+        }
         card.title = titleAttr;
 
         const img = document.createElement('img');
