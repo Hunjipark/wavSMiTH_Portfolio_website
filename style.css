@@ -546,17 +546,18 @@ body {
 /* ---- Career Game Grid (인스타그램 갤러리) ---- */
 .career-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2열 유지 */
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   padding-top: 5px;
-  align-items: start; /* 행 높이를 강제로 맞추지 않음 → 각 이미지가 자기 비율대로 */
 }
 
 .career-grid-item {
+  width: 100%;
+  aspect-ratio: 460 / 215;   /* 스팀 캡슐 이미지 표준 비율(가로형) */
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  background: rgba(20, 20, 20, 0.6); /* 로딩 중/여백 배경 */
+  background: rgba(20, 20, 20, 0.6);
   border: 1px solid var(--panel-border);
   transition: transform 0.25s ease-out, box-shadow 0.25s;
 }
@@ -574,9 +575,12 @@ body {
 
 .career-grid-item img {
   width: 100%;
-  height: auto;   /* 원본 비율 그대로 */
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
+
+
 
 
 
