@@ -580,6 +580,11 @@ body {
   display: block;
 }
 
+/* PNG(투명배경) 이미지는 줌아웃해서 전체가 보이도록 */
+.career-grid-item--light img {
+  object-fit: contain;
+}
+
 
 
 
